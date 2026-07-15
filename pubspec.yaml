@@ -1,0 +1,31 @@
+name: shiftplan
+description: "교대근무 시간표 - 달력 + 홈 위젯 (Android/iOS)"
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # 달력 위젯
+  table_calendar: ^3.1.2
+  # 홈 화면 위젯(안드로이드 AppWidget / iOS WidgetKit) 브리지
+  home_widget: ^0.7.0
+  # 로컬 저장
+  shared_preferences: ^2.3.2
+  # 날짜/로케일 포맷
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
