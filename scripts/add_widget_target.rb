@@ -46,6 +46,15 @@ embed.symbol_dst_subfolder_spec = :plug_ins
 build_file = embed.add_file_reference(widget.product_reference)
 build_file.settings = { 'ATTRIBUTES' => ['RemoveHeadersOnCopy'] }
 
+# Flutter의 'Thin Binary' 스크립트 단계 뒤에 임베드가 오면 빌드 그래프에
+# 순환이 생긴다. 임베드 단계를 그 앞으로 옮긴다.
+phases = runner.build_phases
+thin = phases.find { |p| p.display_name.to_s.include?('Thin Binary') }
+if thin
+  phases.delete(embed)
+  phases.insert(phases.index(thin), embed)
+end
+
 # Runner에 App Group entitlements 연결.
 runner.build_configurations.each do |config|
   config.build_settings['CODE_SIGN_ENTITLEMENTS'] = 'Runner/Runner.entitlements'
