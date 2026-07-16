@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:intl/intl.dart';
 
@@ -30,7 +31,17 @@ class WidgetService {
 
   static Future<void> init() async {
     if (!_supported) return;
-    await HomeWidget.setAppGroupId(iosAppGroupId);
+    // 사이드로딩 재서명으로 App Group id가 바뀌었을 수 있으니
+    // 네이티브에서 실제 값을 조회한다 (실패 시 기본값).
+    String groupId = iosAppGroupId;
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
+      try {
+        final String? actual = await const MethodChannel('shiftplan/app_group')
+            .invokeMethod<String>('getAppGroupId');
+        if (actual != null && actual.isNotEmpty) groupId = actual;
+      } catch (_) {}
+    }
+    await HomeWidget.setAppGroupId(groupId);
   }
 
   /// 이번 주(월~일)와 오늘/내일 근무 정보를 위젯 저장소에 기록하고 갱신한다.

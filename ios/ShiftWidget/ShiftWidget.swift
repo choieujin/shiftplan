@@ -5,7 +5,24 @@ import SwiftUI
 // 오늘/내일 근무를 표시하는 홈 화면 위젯.
 
 // ⚠️ Runner 앱과 동일한 App Group id를 사용해야 한다.
-let appGroupId = "group.com.example.shiftplan"
+// 사이드로딩(AltStore) 재서명 시 id가 바뀌므로, 실제 서명된 값을
+// embedded.mobileprovision에서 읽고 실패하면 원래 값을 쓴다.
+func appGroupFromEmbeddedProfile() -> String? {
+    guard let url = Bundle.main.url(forResource: "embedded", withExtension: "mobileprovision"),
+          let data = try? Data(contentsOf: url),
+          let start = data.range(of: Data("<plist".utf8)),
+          let end = data.range(of: Data("</plist>".utf8))
+    else { return nil }
+    let plistData = data.subdata(in: start.lowerBound..<end.upperBound)
+    guard let plist = try? PropertyListSerialization.propertyList(
+            from: plistData, options: [], format: nil) as? [String: Any],
+          let entitlements = plist["Entitlements"] as? [String: Any],
+          let groups = entitlements["com.apple.security.application-groups"] as? [String]
+    else { return nil }
+    return groups.first
+}
+
+let appGroupId = appGroupFromEmbeddedProfile() ?? "group.com.example.shiftplan"
 
 struct WeekDay: Identifiable {
     let id: Int
