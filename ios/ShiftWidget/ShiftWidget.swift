@@ -7,6 +7,15 @@ import SwiftUI
 // ⚠️ Runner 앱과 동일한 App Group id를 사용해야 한다.
 let appGroupId = "group.com.example.shiftplan"
 
+struct WeekDay: Identifiable {
+    let id: Int
+    let dow: String
+    let num: String
+    let short: String
+    let color: Color
+    let isToday: Bool
+}
+
 struct ShiftEntry: TimelineEntry {
     let date: Date
     let todayDate: String
@@ -19,6 +28,7 @@ struct ShiftEntry: TimelineEntry {
     let tomorrowShort: String
     let tomorrowColor: Color
     let updated: String
+    let week: [WeekDay]
 }
 
 func colorFromHex(_ hex: String) -> Color {
@@ -45,7 +55,11 @@ struct Provider: TimelineProvider {
             tomorrowName: "야간",
             tomorrowShort: "야",
             tomorrowColor: .blue,
-            updated: ""
+            updated: "",
+            week: (0..<7).map { i in
+                WeekDay(id: i, dow: ["월", "화", "수", "목", "금", "토", "일"][i],
+                        num: "\(i + 1)", short: "주", color: .green, isToday: i == 2)
+            }
         )
     }
 
@@ -77,15 +91,78 @@ struct Provider: TimelineProvider {
             tomorrowName: str("tomorrow_name", "없음"),
             tomorrowShort: str("tomorrow_short", "-"),
             tomorrowColor: colorFromHex(str("tomorrow_color", "#B0BEC5")),
-            updated: str("widget_updated", "")
+            updated: str("widget_updated", ""),
+            week: (0..<7).map { i in
+                WeekDay(
+                    id: i,
+                    dow: str("week_\(i)_dow", ["월", "화", "수", "목", "금", "토", "일"][i]),
+                    num: str("week_\(i)_num", "-"),
+                    short: str("week_\(i)_short", "-"),
+                    color: colorFromHex(str("week_\(i)_color", "#B0BEC5")),
+                    isToday: str("week_\(i)_today", "false") == "true"
+                )
+            }
         )
     }
 }
 
 struct ShiftWidgetEntryView: View {
     var entry: Provider.Entry
+    @Environment(\.widgetFamily) var family
 
     var body: some View {
+        if family == .systemMedium {
+            weekView
+        } else {
+            todayTomorrowView
+        }
+    }
+
+    // 중간 크기: 이번 주(월~일) 근무 한눈에 보기.
+    var weekView: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("이번 주 근무")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                Spacer()
+                if !entry.updated.isEmpty {
+                    Text(entry.updated)
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
+            }
+            HStack(spacing: 6) {
+                ForEach(entry.week) { day in
+                    VStack(spacing: 3) {
+                        Text(day.dow)
+                            .font(.caption2)
+                            .foregroundColor(day.id == 6 ? .red : .secondary)
+                        Text(day.num)
+                            .font(.caption)
+                            .bold()
+                        Text(day.short)
+                            .font(.caption)
+                            .bold()
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, minHeight: 26)
+                            .background(day.color)
+                            .cornerRadius(6)
+                    }
+                    .padding(.vertical, 4)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color.primary.opacity(day.isToday ? 0.08 : 0))
+                    )
+                }
+            }
+        }
+        .padding(12)
+    }
+
+    // 작은 크기: 오늘/내일 근무.
+    var todayTomorrowView: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("교대근무 시간표")
                 .font(.caption2)
@@ -153,7 +230,7 @@ struct ShiftWidget: Widget {
             }
         }
         .configurationDisplayName("교대근무")
-        .description("오늘과 내일의 근무를 표시합니다.")
+        .description("작은 크기는 오늘/내일, 중간 크기는 이번 주 근무를 표시합니다.")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
