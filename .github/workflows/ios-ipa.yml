@@ -10,6 +10,7 @@ on:
     paths:
       - "lib/**"
       - "ios/**"
+      - "scripts/**"
       - "pubspec.yaml"
       - ".github/workflows/ios-ipa.yml"
 
@@ -31,8 +32,23 @@ jobs:
       - name: Run tests
         run: flutter test
 
+      - name: Add widget extension target
+        run: |
+          gem list -i xcodeproj >/dev/null 2>&1 || sudo gem install xcodeproj --no-document
+          ruby scripts/add_widget_target.rb
+
       - name: Build iOS (no codesign)
         run: flutter build ios --release --no-codesign
+
+      # 서명 없는 바이너리에는 entitlements가 없어 AltStore가 App Group을
+      # 인식하지 못한다. 애드혹 서명으로 entitlements를 심어준다.
+      - name: Ad-hoc sign with entitlements
+        run: |
+          APP=build/ios/iphoneos/Runner.app
+          ls "$APP/PlugIns/ShiftWidget.appex" || { echo "widget missing!"; exit 1; }
+          for f in "$APP/Frameworks/"*.framework; do codesign --force -s - "$f"; done
+          codesign --force -s - --entitlements ios/ShiftWidget/ShiftWidget.entitlements "$APP/PlugIns/ShiftWidget.appex"
+          codesign --force -s - --entitlements ios/Runner/Runner.entitlements "$APP"
 
       - name: Package .ipa
         run: |
