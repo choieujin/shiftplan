@@ -10,9 +10,27 @@ import es.antonborri.home_widget.HomeWidgetProvider
 
 /**
  * 홈 화면 위젯. Flutter( home_widget )가 저장한 SharedPreferences 데이터를 읽어
- * 오늘/내일 근무를 표시한다.
+ * 이번 주(월~일) 근무 패턴을 한 줄로 표시한다. 오늘은 테두리로 강조된다.
  */
 class ShiftWidgetProvider : HomeWidgetProvider() {
+
+    private val cellIds = intArrayOf(
+        R.id.day0_cell, R.id.day1_cell, R.id.day2_cell, R.id.day3_cell,
+        R.id.day4_cell, R.id.day5_cell, R.id.day6_cell,
+    )
+    private val dowIds = intArrayOf(
+        R.id.day0_dow, R.id.day1_dow, R.id.day2_dow, R.id.day3_dow,
+        R.id.day4_dow, R.id.day5_dow, R.id.day6_dow,
+    )
+    private val numIds = intArrayOf(
+        R.id.day0_num, R.id.day1_num, R.id.day2_num, R.id.day3_num,
+        R.id.day4_num, R.id.day5_num, R.id.day6_num,
+    )
+    private val badgeIds = intArrayOf(
+        R.id.day0_badge, R.id.day1_badge, R.id.day2_badge, R.id.day3_badge,
+        R.id.day4_badge, R.id.day5_badge, R.id.day6_badge,
+    )
+    private val defaultDows = arrayOf("월", "화", "수", "목", "금", "토", "일")
 
     override fun onUpdate(
         context: Context,
@@ -23,24 +41,32 @@ class ShiftWidgetProvider : HomeWidgetProvider() {
         for (widgetId in appWidgetIds) {
             val views = RemoteViews(context.packageName, R.layout.shift_widget)
 
-            bindDay(
-                views,
-                prefix = "today",
-                widgetData = widgetData,
-                dateViewId = R.id.today_date,
-                badgeViewId = R.id.today_badge,
-                nameViewId = R.id.today_name,
-                timeViewId = R.id.today_time,
-            )
-            bindDay(
-                views,
-                prefix = "tomorrow",
-                widgetData = widgetData,
-                dateViewId = R.id.tomorrow_date,
-                badgeViewId = R.id.tomorrow_badge,
-                nameViewId = R.id.tomorrow_name,
-                timeViewId = R.id.tomorrow_time,
-            )
+            for (i in 0 until 7) {
+                views.setTextViewText(
+                    dowIds[i],
+                    widgetData.getString("week_${i}_dow", defaultDows[i]) ?: defaultDows[i],
+                )
+                views.setTextViewText(
+                    numIds[i],
+                    widgetData.getString("week_${i}_num", "") ?: "",
+                )
+                views.setTextViewText(
+                    badgeIds[i],
+                    widgetData.getString("week_${i}_short", "-") ?: "-",
+                )
+                views.setInt(
+                    badgeIds[i],
+                    "setBackgroundColor",
+                    parseColor(widgetData.getString("week_${i}_color", null)),
+                )
+                val isToday =
+                    widgetData.getString("week_${i}_today", "false") == "true"
+                views.setInt(
+                    cellIds[i],
+                    "setBackgroundResource",
+                    if (isToday) R.drawable.today_bg else 0,
+                )
+            }
 
             views.setTextViewText(
                 R.id.updated,
@@ -58,31 +84,11 @@ class ShiftWidgetProvider : HomeWidgetProvider() {
         }
     }
 
-    private fun bindDay(
-        views: RemoteViews,
-        prefix: String,
-        widgetData: SharedPreferences,
-        dateViewId: Int,
-        badgeViewId: Int,
-        nameViewId: Int,
-        timeViewId: Int,
-    ) {
-        val date = widgetData.getString("${prefix}_date", "") ?: ""
-        val name = widgetData.getString("${prefix}_name", "없음") ?: "없음"
-        val short = widgetData.getString("${prefix}_short", "-") ?: "-"
-        val time = widgetData.getString("${prefix}_time", "") ?: ""
-        val colorHex = widgetData.getString("${prefix}_color", "#B0BEC5") ?: "#B0BEC5"
-
-        views.setTextViewText(dateViewId, date)
-        views.setTextViewText(badgeViewId, short)
-        views.setTextViewText(nameViewId, name)
-        views.setTextViewText(timeViewId, time)
-
-        val color = try {
-            Color.parseColor(colorHex)
+    private fun parseColor(hex: String?): Int {
+        return try {
+            Color.parseColor(hex ?: "#B0BEC5")
         } catch (e: IllegalArgumentException) {
             Color.parseColor("#B0BEC5")
         }
-        views.setInt(badgeViewId, "setBackgroundColor", color)
     }
 }

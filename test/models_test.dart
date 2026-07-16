@@ -48,10 +48,11 @@ void main() {
   });
 
   group('defaults', () {
-    test('기본 근무 유형 4종을 제공한다', () {
+    test('기본 근무 유형 5종을 제공한다', () {
       final defaults = ShiftType.defaults();
-      expect(defaults.length, 4);
-      expect(defaults.map((e) => e.id), containsAll(['day', 'evening', 'night', 'off']));
+      expect(defaults.length, 5);
+      expect(defaults.map((e) => e.id),
+          containsAll(['day', 'evening', 'night', 'rest', 'off']));
     });
   });
 }

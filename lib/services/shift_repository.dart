@@ -13,10 +13,18 @@ import 'widget_service.dart';
 class ShiftRepository extends ChangeNotifier {
   static const String _typesKey = 'shift_types';
   static const String _assignmentsKey = 'shift_assignments';
+  static const String _ruleKey = 'pattern_rule';
+
+  /// 반복 패턴이 덮는 날짜를 명시적으로 비웠음을 나타내는 배정값.
+  static const String _clearedMarker = '';
 
   final List<ShiftType> _types = [];
-  // dateKey('yyyy-MM-dd') -> shiftTypeId
+  // dateKey('yyyy-MM-dd') -> shiftTypeId ('' 은 명시적 비움)
   final Map<String, String> _assignments = {};
+
+  // 시작일부터 무제한 반복되는 패턴 규칙.
+  DateTime? _ruleStart;
+  List<String?> _rulePattern = [];
 
   bool _loaded = false;
   bool get isLoaded => _loaded;
@@ -27,10 +35,30 @@ class ShiftRepository extends ChangeNotifier {
 
   Map<String, String> get assignments => Map.unmodifiable(_assignments);
 
+  bool get hasPatternRule => _ruleStart != null && _rulePattern.isNotEmpty;
+
+  DateTime? get patternRuleStart => _ruleStart;
+
+  List<String?> get patternRule => List.unmodifiable(_rulePattern);
+
   ShiftType? typeForDate(DateTime date) {
     final String? id = _assignments[ShiftAssignment.keyFor(date)];
-    if (id == null) return null;
-    return typesById[id];
+    if (id != null) {
+      return id == _clearedMarker ? null : typesById[id];
+    }
+    final String? ruleId = _ruleTypeIdFor(date);
+    return ruleId == null ? null : typesById[ruleId];
+  }
+
+  /// 반복 패턴 규칙이 [date]에 배정하는 근무 유형 id. 규칙이 없거나
+  /// 시작일 이전이거나 해당 칸이 비움이면 null.
+  String? _ruleTypeIdFor(DateTime date) {
+    final DateTime? start = _ruleStart;
+    if (start == null || _rulePattern.isEmpty) return null;
+    final DateTime day = DateTime(date.year, date.month, date.day);
+    final int diff = day.difference(start).inDays;
+    if (diff < 0) return null;
+    return _rulePattern[diff % _rulePattern.length];
   }
 
   Future<void> load() async {
@@ -56,6 +84,18 @@ class ShiftRepository extends ChangeNotifier {
       map.forEach((k, v) => _assignments[k] = v as String);
     }
 
+    final String? ruleRaw = prefs.getString(_ruleKey);
+    _ruleStart = null;
+    _rulePattern = [];
+    if (ruleRaw != null) {
+      final Map<String, dynamic> rule =
+          jsonDecode(ruleRaw) as Map<String, dynamic>;
+      _ruleStart = DateTime.parse(rule['start'] as String);
+      _rulePattern = (rule['pattern'] as List<dynamic>)
+          .map((e) => e as String?)
+          .toList();
+    }
+
     _loaded = true;
     notifyListeners();
     await _syncWidget();
@@ -70,6 +110,20 @@ class ShiftRepository extends ChangeNotifier {
 
   Future<void> _persistAssignments(SharedPreferences prefs) async {
     await prefs.setString(_assignmentsKey, jsonEncode(_assignments));
+  }
+
+  Future<void> _persistRule(SharedPreferences prefs) async {
+    if (_ruleStart == null || _rulePattern.isEmpty) {
+      await prefs.remove(_ruleKey);
+      return;
+    }
+    await prefs.setString(
+      _ruleKey,
+      jsonEncode({
+        'start': ShiftAssignment.keyFor(_ruleStart!),
+        'pattern': _rulePattern,
+      }),
+    );
   }
 
   // --- 근무 유형 관리 -------------------------------------------------------
@@ -96,9 +150,15 @@ class ShiftRepository extends ChangeNotifier {
     _types.removeWhere((t) => t.id == id);
     // 해당 유형이 배정된 날짜도 비운다.
     _assignments.removeWhere((_, typeId) => typeId == id);
+    // 반복 패턴 규칙에서도 해당 유형 칸을 비운다.
+    _rulePattern = [
+      for (final String? typeId in _rulePattern)
+        typeId == id ? null : typeId,
+    ];
     final prefs = await SharedPreferences.getInstance();
     await _persistTypes(prefs);
     await _persistAssignments(prefs);
+    await _persistRule(prefs);
     notifyListeners();
     await _syncWidget();
   }
@@ -107,46 +167,77 @@ class ShiftRepository extends ChangeNotifier {
 
   Future<void> assign(DateTime date, String? shiftTypeId) async {
     final String key = ShiftAssignment.keyFor(date);
-    if (shiftTypeId == null) {
-      _assignments.remove(key);
-    } else {
-      _assignments[key] = shiftTypeId;
-    }
+    _setAssignment(key, date, shiftTypeId);
     final prefs = await SharedPreferences.getInstance();
     await _persistAssignments(prefs);
     notifyListeners();
     await _syncWidget();
   }
 
-  /// [start]부터 [days]일 동안 [pattern](근무 유형 id 목록)을 반복 적용한다.
+  /// [key]([date])의 배정을 [shiftTypeId]로 바꾼다. null 이면 비우되,
+  /// 반복 패턴 규칙이 그 날짜를 덮고 있으면 명시적 비움으로 기록해
+  /// 규칙이 다시 드러나지 않게 한다.
+  void _setAssignment(String key, DateTime date, String? shiftTypeId) {
+    if (shiftTypeId != null) {
+      _assignments[key] = shiftTypeId;
+    } else if (_ruleTypeIdFor(date) != null) {
+      _assignments[key] = _clearedMarker;
+    } else {
+      _assignments.remove(key);
+    }
+  }
+
+  /// [start]부터 [pattern](근무 유형 id 목록)을 반복 적용한다.
   /// pattern의 요소가 null이면 해당 날짜를 비운다.
+  ///
+  /// [days]가 null이면 시작일 이후 무제한 반복되는 규칙으로 저장하고,
+  /// 시작일 이후의 기존 날짜별 배정은 제거한다.
   Future<void> applyPattern({
     required DateTime start,
-    required int days,
     required List<String?> pattern,
+    int? days,
   }) async {
-    if (pattern.isEmpty || days <= 0) return;
+    if (pattern.isEmpty || (days != null && days <= 0)) return;
     final DateTime base = DateTime(start.year, start.month, start.day);
-    for (int i = 0; i < days; i++) {
-      final DateTime date = base.add(Duration(days: i));
-      final String? typeId = pattern[i % pattern.length];
-      final String key = ShiftAssignment.keyFor(date);
-      if (typeId == null) {
-        _assignments.remove(key);
-      } else {
-        _assignments[key] = typeId;
+    final prefs = await SharedPreferences.getInstance();
+
+    if (days == null) {
+      _ruleStart = base;
+      _rulePattern = List.of(pattern);
+      final String startKey = ShiftAssignment.keyFor(base);
+      _assignments.removeWhere((key, _) => key.compareTo(startKey) >= 0);
+      await _persistRule(prefs);
+    } else {
+      for (int i = 0; i < days; i++) {
+        final DateTime date = base.add(Duration(days: i));
+        _setAssignment(
+          ShiftAssignment.keyFor(date),
+          date,
+          pattern[i % pattern.length],
+        );
       }
     }
+    await _persistAssignments(prefs);
+    notifyListeners();
+    await _syncWidget();
+  }
+
+  /// 무제한 반복 패턴 규칙을 해제한다. 규칙 위에 기록된 명시적 비움도
+  /// 함께 정리한다.
+  Future<void> clearPatternRule() async {
+    if (!hasPatternRule) return;
+    _ruleStart = null;
+    _rulePattern = [];
+    _assignments.removeWhere((_, typeId) => typeId == _clearedMarker);
     final prefs = await SharedPreferences.getInstance();
+    await _persistRule(prefs);
     await _persistAssignments(prefs);
     notifyListeners();
     await _syncWidget();
   }
 
   Future<void> _syncWidget() async {
-    await WidgetService.update(
-      assignments: _assignments,
-      typesById: typesById,
-    );
+    // typeForDate가 반복 패턴 규칙과 명시적 비움까지 반영한다.
+    await WidgetService.update(typeFor: typeForDate);
   }
 }

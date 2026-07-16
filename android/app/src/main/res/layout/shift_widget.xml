@@ -5,76 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/widget_bg"
-    android:padding="12dp">
+    android:padding="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="교대근무 시간표"
-        android:textColor="#88000000"
-        android:textSize="11sp" />
-
-    <!-- 오늘 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="6dp">
-
-        <TextView
-            android:id="@+id/today_badge"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:gravity="center"
-            android:background="@drawable/badge_bg"
-            android:text="-"
-            android:textStyle="bold"
-            android:textColor="#FFFFFFFF"
-            android:textSize="15sp" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/today_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="오늘"
-                android:textColor="#AA000000"
-                android:textSize="11sp" />
-
-            <TextView
-                android:id="@+id/today_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="없음"
-                android:textStyle="bold"
-                android:textColor="#FF000000"
-                android:textSize="17sp" />
-
-            <TextView
-                android:id="@+id/today_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="#88000000"
-                android:textSize="11sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#22000000" />
-
-    <!-- 내일 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,60 +14,299 @@
         android:gravity="center_vertical">
 
         <TextView
-            android:id="@+id/tomorrow_badge"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="교대근무 시간표"
+            android:textColor="#88000000"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/updated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#66000000"
+            android:textSize="9sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/day0_cell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/day0_dow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="월"
+            android:textColor="#88000000"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/day0_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="#AA000000"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/day0_badge"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_marginTop="3dp"
             android:gravity="center"
             android:background="@drawable/badge_bg"
             android:text="-"
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
             android:textSize="12sp" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="10dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/tomorrow_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="내일"
-                android:textColor="#AA000000"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tomorrow_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="없음"
-                android:textColor="#FF000000"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/tomorrow_time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text=""
-                android:textColor="#88000000"
-                android:textSize="11sp" />
-        </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/updated"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/day1_cell"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:gravity="end"
-        android:text=""
-        android:textColor="#66000000"
-        android:textSize="9sp" />
+        android:layout_weight="1"
+        android:layout_marginStart="3dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/day1_dow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="화"
+            android:textColor="#88000000"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/day1_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="#AA000000"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/day1_badge"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:background="@drawable/badge_bg"
+            android:text="-"
+            android:textStyle="bold"
+            android:textColor="#FFFFFFFF"
+            android:textSize="12sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/day2_cell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="3dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/day2_dow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수"
+            android:textColor="#88000000"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/day2_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="#AA000000"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/day2_badge"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:background="@drawable/badge_bg"
+            android:text="-"
+            android:textStyle="bold"
+            android:textColor="#FFFFFFFF"
+            android:textSize="12sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/day3_cell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="3dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/day3_dow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="목"
+            android:textColor="#88000000"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/day3_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="#AA000000"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/day3_badge"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:background="@drawable/badge_bg"
+            android:text="-"
+            android:textStyle="bold"
+            android:textColor="#FFFFFFFF"
+            android:textSize="12sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/day4_cell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="3dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/day4_dow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="금"
+            android:textColor="#88000000"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/day4_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="#AA000000"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/day4_badge"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:background="@drawable/badge_bg"
+            android:text="-"
+            android:textStyle="bold"
+            android:textColor="#FFFFFFFF"
+            android:textSize="12sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/day5_cell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="3dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/day5_dow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="토"
+            android:textColor="#1565C0"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/day5_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="#1565C0"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/day5_badge"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:background="@drawable/badge_bg"
+            android:text="-"
+            android:textStyle="bold"
+            android:textColor="#FFFFFFFF"
+            android:textSize="12sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/day6_cell"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="3dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/day6_dow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="일"
+            android:textColor="#D32F2F"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/day6_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="#D32F2F"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/day6_badge"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:background="@drawable/badge_bg"
+            android:text="-"
+            android:textStyle="bold"
+            android:textColor="#FFFFFFFF"
+            android:textSize="12sp" />
+    </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

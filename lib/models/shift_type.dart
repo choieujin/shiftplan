@@ -99,6 +99,12 @@ class ShiftType {
           endTime: '07:00',
         ),
         ShiftType(
+          id: 'rest',
+          name: '비번',
+          shortLabel: '비',
+          colorValue: 0xFF6D4C41, // brown 600
+        ),
+        ShiftType(
           id: 'off',
           name: '휴무',
           shortLabel: '휴',

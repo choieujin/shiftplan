@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../models/shift_type.dart';
+import '../services/holiday_service.dart';
 import '../services/shift_repository.dart';
 import '../widgets/shift_legend.dart';
 import 'pattern_screen.dart';
@@ -76,6 +77,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
         formatButtonVisible: false,
         titleCentered: true,
       ),
+      // 일요일과 대한민국 공휴일은 빨간 글씨로 표시한다.
+      weekendDays: const [DateTime.sunday],
+      holidayPredicate: HolidayService.isHoliday,
+      calendarStyle: const CalendarStyle(
+        weekendTextStyle: TextStyle(color: Colors.red),
+        holidayTextStyle: TextStyle(color: Colors.red),
+        holidayDecoration: BoxDecoration(),
+      ),
+      daysOfWeekStyle: const DaysOfWeekStyle(
+        weekendStyle: TextStyle(color: Colors.red),
+      ),
       onDaySelected: (selected, focused) {
         setState(() {
           _selectedDay = selected;
@@ -116,13 +128,28 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final ShiftType? type = repo.typeForDate(_selectedDay);
     final String dateLabel =
         DateFormat('yyyy년 M월 d일 (E)', 'ko').format(_selectedDay);
+    final String? holiday = HolidayService.holidayName(_selectedDay);
 
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(dateLabel, style: Theme.of(context).textTheme.titleMedium),
+          Row(
+            children: [
+              Text(dateLabel, style: Theme.of(context).textTheme.titleMedium),
+              if (holiday != null) ...[
+                const SizedBox(width: 8),
+                Text(
+                  holiday,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall
+                      ?.copyWith(color: Colors.red),
+                ),
+              ],
+            ],
+          ),
           const SizedBox(height: 12),
           if (type == null)
             const Card(
