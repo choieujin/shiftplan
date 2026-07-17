@@ -1,4 +1,4 @@
-package com.example.shiftplan
+package com.choieujin.shiftplan
 
 import android.appwidget.AppWidgetManager
 import android.content.Context

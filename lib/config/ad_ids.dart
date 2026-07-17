@@ -8,9 +8,8 @@ import 'package:flutter/foundation.dart';
 class AdIds {
   AdIds._();
 
-  /// TODO: AdMob에서 배너 광고 단위 생성 후 실제 id로 교체.
   static const String _androidBanner =
-      'ca-app-pub-3940256099942544/6300978111';
+      'ca-app-pub-4072566205952525/1063396694';
 
   static String get banner {
     if (defaultTargetPlatform == TargetPlatform.android) {
