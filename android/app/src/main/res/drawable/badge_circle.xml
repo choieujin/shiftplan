@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 흰 원. 코드에서 setColorFilter로 근무 색상을 입힌다.
+     (setBackgroundColor는 배경 drawable을 덮어써 모양이 사라지므로 쓰지 않는다) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#FFFFFFFF" />
+</shape>

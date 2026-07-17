@@ -68,15 +68,20 @@ class MonthWidgetProvider : HomeWidgetProvider() {
                     if (isHoliday) HOLIDAY_COLOR else DEFAULT_NUM_COLOR,
                 )
 
+                val dotId = dotIds[i]
                 if (short.isEmpty()) {
                     // 근무가 없는 날(또는 이번 달이 아닌 칸)은 배지를 감춘다.
                     views.setViewVisibility(badgeId, View.INVISIBLE)
+                    views.setViewVisibility(dotId, View.INVISIBLE)
                 } else {
                     views.setViewVisibility(badgeId, View.VISIBLE)
+                    views.setViewVisibility(dotId, View.VISIBLE)
                     views.setTextViewText(badgeId, short)
+                    // 흰 원 이미지에 근무 색상을 입힌다. setBackgroundColor를 쓰면
+                    // 배경 drawable이 덮어써져 원 모양이 사라진다.
                     views.setInt(
-                        badgeId,
-                        "setBackgroundColor",
+                        dotId,
+                        "setColorFilter",
                         parseColor(cell?.optString("c")),
                     )
                 }
@@ -136,6 +141,17 @@ class MonthWidgetProvider : HomeWidgetProvider() {
             R.id.m30_num, R.id.m31_num, R.id.m32_num, R.id.m33_num, R.id.m34_num,
             R.id.m35_num, R.id.m36_num, R.id.m37_num, R.id.m38_num, R.id.m39_num,
             R.id.m40_num, R.id.m41_num,
+        )
+        val dotIds = intArrayOf(
+            R.id.m0_dot, R.id.m1_dot, R.id.m2_dot, R.id.m3_dot, R.id.m4_dot,
+            R.id.m5_dot, R.id.m6_dot, R.id.m7_dot, R.id.m8_dot, R.id.m9_dot,
+            R.id.m10_dot, R.id.m11_dot, R.id.m12_dot, R.id.m13_dot, R.id.m14_dot,
+            R.id.m15_dot, R.id.m16_dot, R.id.m17_dot, R.id.m18_dot, R.id.m19_dot,
+            R.id.m20_dot, R.id.m21_dot, R.id.m22_dot, R.id.m23_dot, R.id.m24_dot,
+            R.id.m25_dot, R.id.m26_dot, R.id.m27_dot, R.id.m28_dot, R.id.m29_dot,
+            R.id.m30_dot, R.id.m31_dot, R.id.m32_dot, R.id.m33_dot, R.id.m34_dot,
+            R.id.m35_dot, R.id.m36_dot, R.id.m37_dot, R.id.m38_dot, R.id.m39_dot,
+            R.id.m40_dot, R.id.m41_dot,
         )
         val badgeIds = intArrayOf(
             R.id.m0_badge, R.id.m1_badge, R.id.m2_badge, R.id.m3_badge,

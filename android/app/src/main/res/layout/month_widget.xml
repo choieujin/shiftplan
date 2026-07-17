@@ -118,7 +118,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m0_num"
@@ -128,21 +128,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m0_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m0_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m0_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m1_cell"
@@ -152,7 +161,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m1_num"
@@ -162,21 +171,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m1_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m1_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m1_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m2_cell"
@@ -186,7 +204,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m2_num"
@@ -196,21 +214,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m2_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m2_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m2_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m3_cell"
@@ -220,7 +247,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m3_num"
@@ -230,21 +257,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m3_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m3_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m3_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m4_cell"
@@ -254,7 +290,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m4_num"
@@ -264,21 +300,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m4_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m4_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m4_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m5_cell"
@@ -288,7 +333,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m5_num"
@@ -298,21 +343,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m5_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m5_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m5_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m6_cell"
@@ -322,7 +376,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m6_num"
@@ -332,21 +386,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m6_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m6_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m6_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -364,7 +427,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m7_num"
@@ -374,21 +437,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m7_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m7_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m7_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m8_cell"
@@ -398,7 +470,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m8_num"
@@ -408,21 +480,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m8_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m8_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m8_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m9_cell"
@@ -432,7 +513,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m9_num"
@@ -442,21 +523,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m9_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m9_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m9_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m10_cell"
@@ -466,7 +556,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m10_num"
@@ -476,21 +566,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m10_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m10_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m10_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m11_cell"
@@ -500,7 +599,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m11_num"
@@ -510,21 +609,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m11_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m11_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m11_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m12_cell"
@@ -534,7 +642,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m12_num"
@@ -544,21 +652,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m12_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m12_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m12_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m13_cell"
@@ -568,7 +685,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m13_num"
@@ -578,21 +695,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m13_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m13_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m13_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -610,7 +736,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m14_num"
@@ -620,21 +746,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m14_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m14_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m14_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m15_cell"
@@ -644,7 +779,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m15_num"
@@ -654,21 +789,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m15_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m15_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m15_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m16_cell"
@@ -678,7 +822,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m16_num"
@@ -688,21 +832,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m16_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m16_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m16_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m17_cell"
@@ -712,7 +865,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m17_num"
@@ -722,21 +875,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m17_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m17_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m17_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m18_cell"
@@ -746,7 +908,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m18_num"
@@ -756,21 +918,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m18_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m18_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m18_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m19_cell"
@@ -780,7 +951,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m19_num"
@@ -790,21 +961,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m19_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m19_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m19_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m20_cell"
@@ -814,7 +994,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m20_num"
@@ -824,21 +1004,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m20_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m20_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m20_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -856,7 +1045,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m21_num"
@@ -866,21 +1055,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m21_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m21_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m21_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m22_cell"
@@ -890,7 +1088,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m22_num"
@@ -900,21 +1098,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m22_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m22_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m22_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m23_cell"
@@ -924,7 +1131,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m23_num"
@@ -934,21 +1141,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m23_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m23_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m23_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m24_cell"
@@ -958,7 +1174,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m24_num"
@@ -968,21 +1184,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m24_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m24_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m24_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m25_cell"
@@ -992,7 +1217,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m25_num"
@@ -1002,21 +1227,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m25_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m25_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m25_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m26_cell"
@@ -1026,7 +1260,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m26_num"
@@ -1036,21 +1270,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m26_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m26_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m26_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m27_cell"
@@ -1060,7 +1303,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m27_num"
@@ -1070,21 +1313,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m27_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m27_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m27_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -1102,7 +1354,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m28_num"
@@ -1112,21 +1364,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m28_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m28_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m28_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m29_cell"
@@ -1136,7 +1397,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m29_num"
@@ -1146,21 +1407,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m29_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m29_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m29_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m30_cell"
@@ -1170,7 +1440,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m30_num"
@@ -1180,21 +1450,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m30_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m30_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m30_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m31_cell"
@@ -1204,7 +1483,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m31_num"
@@ -1214,21 +1493,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m31_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m31_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m31_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m32_cell"
@@ -1238,7 +1526,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m32_num"
@@ -1248,21 +1536,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m32_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m32_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m32_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m33_cell"
@@ -1272,7 +1569,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m33_num"
@@ -1282,21 +1579,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m33_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m33_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m33_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m34_cell"
@@ -1306,7 +1612,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m34_num"
@@ -1316,21 +1622,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m34_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m34_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m34_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -1348,7 +1663,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m35_num"
@@ -1358,21 +1673,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m35_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m35_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m35_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m36_cell"
@@ -1382,7 +1706,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m36_num"
@@ -1392,21 +1716,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m36_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m36_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m36_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m37_cell"
@@ -1416,7 +1749,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m37_num"
@@ -1426,21 +1759,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m37_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m37_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m37_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m38_cell"
@@ -1450,7 +1792,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m38_num"
@@ -1460,21 +1802,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m38_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m38_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m38_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m39_cell"
@@ -1484,7 +1835,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m39_num"
@@ -1494,21 +1845,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m39_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m39_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m39_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m40_cell"
@@ -1518,7 +1878,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m40_num"
@@ -1528,21 +1888,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m40_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m40_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m40_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/m41_cell"
@@ -1552,7 +1921,7 @@
                 android:layout_margin="1dp"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
-                android:paddingTop="2dp">
+                android:paddingTop="3dp">
 
                 <TextView
                     android:id="@+id/m41_num"
@@ -1562,21 +1931,30 @@
                     android:textColor="#AA000000"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/m41_badge"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:gravity="center"
-                    android:background="@drawable/badge_bg"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="13sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/m41_dot"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/badge_circle"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/m41_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="15sp" />
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
