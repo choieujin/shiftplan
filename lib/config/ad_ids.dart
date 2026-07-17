@@ -2,15 +2,19 @@ import 'package:flutter/foundation.dart';
 
 /// AdMob 광고 단위 id.
 ///
-/// 현재는 구글 공식 **테스트 id**를 사용한다. AdMob 가입 후 발급받은
-/// 실제 id로 아래 상수만 교체하면 된다 (AndroidManifest.xml과
-/// ios/Runner/Info.plist의 앱 id도 함께 교체).
+/// - Android(Play 스토어 배포): 실제 id 사용.
+/// - iOS(개인 사이드로딩): 실수로 실제 광고를 클릭해 무효 트래픽이
+///   생기지 않도록 구글 공식 테스트 id를 유지한다.
 class AdIds {
   AdIds._();
 
+  /// TODO: AdMob에서 배너 광고 단위 생성 후 실제 id로 교체.
+  static const String _androidBanner =
+      'ca-app-pub-3940256099942544/6300978111';
+
   static String get banner {
     if (defaultTargetPlatform == TargetPlatform.android) {
-      return 'ca-app-pub-3940256099942544/6300978111'; // Android 테스트 배너
+      return _androidBanner;
     }
     return 'ca-app-pub-3940256099942544/2934735716'; // iOS 테스트 배너
   }
