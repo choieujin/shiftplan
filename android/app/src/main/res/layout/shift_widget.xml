@@ -4,8 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_vertical"
     android:background="@drawable/widget_bg"
-    android:padding="10dp">
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="교대근무 시간표"
+            android:text="이번 주 근무"
             android:textColor="#88000000"
             android:textSize="10sp" />
 
@@ -33,7 +37,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal">
 
     <LinearLayout
@@ -43,7 +47,8 @@
         android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="3dp">
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
 
         <TextView
             android:id="@+id/day0_dow"
@@ -57,32 +62,36 @@
             android:id="@+id/day0_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:text=""
             android:textStyle="bold"
             android:textColor="#AA000000"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/day0_badge"
             android:layout_width="match_parent"
-            android:layout_height="22dp"
-            android:layout_marginTop="3dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
             android:gravity="center"
             android:background="@drawable/badge_bg"
             android:text="-"
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/day1_cell"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="2dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="3dp">
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
 
         <TextView
             android:id="@+id/day1_dow"
@@ -96,32 +105,36 @@
             android:id="@+id/day1_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:text=""
             android:textStyle="bold"
             android:textColor="#AA000000"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/day1_badge"
             android:layout_width="match_parent"
-            android:layout_height="22dp"
-            android:layout_marginTop="3dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
             android:gravity="center"
             android:background="@drawable/badge_bg"
             android:text="-"
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/day2_cell"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="2dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="3dp">
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
 
         <TextView
             android:id="@+id/day2_dow"
@@ -135,32 +148,36 @@
             android:id="@+id/day2_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:text=""
             android:textStyle="bold"
             android:textColor="#AA000000"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/day2_badge"
             android:layout_width="match_parent"
-            android:layout_height="22dp"
-            android:layout_marginTop="3dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
             android:gravity="center"
             android:background="@drawable/badge_bg"
             android:text="-"
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/day3_cell"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="2dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="3dp">
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
 
         <TextView
             android:id="@+id/day3_dow"
@@ -174,32 +191,36 @@
             android:id="@+id/day3_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:text=""
             android:textStyle="bold"
             android:textColor="#AA000000"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/day3_badge"
             android:layout_width="match_parent"
-            android:layout_height="22dp"
-            android:layout_marginTop="3dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
             android:gravity="center"
             android:background="@drawable/badge_bg"
             android:text="-"
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/day4_cell"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="2dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="3dp">
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
 
         <TextView
             android:id="@+id/day4_dow"
@@ -213,32 +234,36 @@
             android:id="@+id/day4_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:text=""
             android:textStyle="bold"
             android:textColor="#AA000000"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/day4_badge"
             android:layout_width="match_parent"
-            android:layout_height="22dp"
-            android:layout_marginTop="3dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
             android:gravity="center"
             android:background="@drawable/badge_bg"
             android:text="-"
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/day5_cell"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="2dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="3dp">
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
 
         <TextView
             android:id="@+id/day5_dow"
@@ -252,32 +277,36 @@
             android:id="@+id/day5_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:text=""
             android:textStyle="bold"
             android:textColor="#1565C0"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/day5_badge"
             android:layout_width="match_parent"
-            android:layout_height="22dp"
-            android:layout_marginTop="3dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
             android:gravity="center"
             android:background="@drawable/badge_bg"
             android:text="-"
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/day6_cell"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="2dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="3dp">
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
 
         <TextView
             android:id="@+id/day6_dow"
@@ -291,22 +320,25 @@
             android:id="@+id/day6_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:text=""
             android:textStyle="bold"
             android:textColor="#D32F2F"
-            android:textSize="11sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/day6_badge"
             android:layout_width="match_parent"
-            android:layout_height="22dp"
-            android:layout_marginTop="3dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
             android:gravity="center"
             android:background="@drawable/badge_bg"
             android:text="-"
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
     </LinearLayout>
     </LinearLayout>
 </LinearLayout>
