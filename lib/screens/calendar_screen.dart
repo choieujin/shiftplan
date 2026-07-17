@@ -5,6 +5,7 @@ import 'package:table_calendar/table_calendar.dart';
 import '../models/shift_type.dart';
 import '../services/holiday_service.dart';
 import '../services/shift_repository.dart';
+import '../widgets/ad_banner.dart';
 import '../widgets/shift_legend.dart';
 import 'pattern_screen.dart';
 import 'shift_types_screen.dart';
@@ -61,6 +62,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         icon: const Icon(Icons.edit_calendar),
         label: const Text('근무 배정'),
       ),
+      bottomNavigationBar: const AdBanner(),
     );
   }
 

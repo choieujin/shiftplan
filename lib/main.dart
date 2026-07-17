@@ -1,15 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'screens/calendar_screen.dart';
 import 'services/shift_repository.dart';
 import 'services/widget_service.dart';
+import 'widgets/ad_banner.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('ko');
   await WidgetService.init();
+  if (AdBanner.supported) {
+    // 광고 SDK 초기화는 앱 표시를 막지 않도록 기다리지 않는다.
+    unawaited(MobileAds.instance.initialize());
+  }
 
   final ShiftRepository repository = ShiftRepository();
   await repository.load();

@@ -25,6 +25,11 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
+        <!-- AdMob 앱 id. 현재는 구글 테스트 id — AdMob 가입 후 실제 id로 교체. -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
         <!-- 홈 화면 위젯 -->
         <receiver
             android:name=".ShiftWidgetProvider"
