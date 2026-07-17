@@ -1,0 +1,1535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/month_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/widget_bg"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/month_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="#DD000000"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/month_updated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#66000000"
+            android:textSize="9sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="월"
+            android:textColor="#88000000"
+            android:textSize="11sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="화"
+            android:textColor="#88000000"
+            android:textSize="11sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="수"
+            android:textColor="#88000000"
+            android:textSize="11sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="목"
+            android:textColor="#88000000"
+            android:textSize="11sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="금"
+            android:textColor="#88000000"
+            android:textSize="11sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="토"
+            android:textColor="#1565C0"
+            android:textSize="11sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="일"
+            android:textColor="#D32F2F"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/m0_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m0_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m0_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m1_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m1_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m1_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m2_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m2_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m2_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m3_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m3_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m3_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m4_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m4_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m4_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m5_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m5_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m5_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m6_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m6_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m6_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/m7_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m7_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m7_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m8_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m8_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m8_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m9_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m9_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m9_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m10_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m10_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m10_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m11_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m11_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m11_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m12_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m12_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m12_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m13_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m13_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m13_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/m14_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m14_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m14_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m15_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m15_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m15_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m16_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m16_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m16_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m17_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m17_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m17_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m18_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m18_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m18_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m19_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m19_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m19_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m20_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m20_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m20_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/m21_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m21_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m21_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m22_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m22_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m22_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m23_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m23_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m23_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m24_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m24_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m24_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m25_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m25_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m25_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m26_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m26_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m26_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m27_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m27_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m27_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/m28_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m28_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m28_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m29_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m29_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m29_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m30_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m30_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m30_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m31_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m31_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m31_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m32_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m32_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m32_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m33_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m33_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m33_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m34_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m34_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m34_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/m35_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m35_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m35_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m36_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m36_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m36_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m37_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m37_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m37_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m38_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m38_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m38_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m39_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m39_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m39_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m40_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m40_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m40_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/m41_cell"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp">
+
+                <TextView
+                    android:id="@+id/m41_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#AA000000"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/m41_badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:gravity="center"
+                    android:background="@drawable/badge_bg"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
