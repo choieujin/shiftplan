@@ -41,6 +41,17 @@ class MonthWidgetProvider : HomeWidgetProvider() {
                 widgetData.getString("widget_updated", "") ?: "",
             )
 
+            // 이번 달 날짜가 하나도 없는 주(마지막 줄)는 숨겨 빈 공간을 없앤다.
+            for (r in 0 until 6) {
+                val hasDay = (0 until 7).any { c ->
+                    !(days?.optJSONObject(r * 7 + c)?.optString("n")).isNullOrEmpty()
+                }
+                views.setViewVisibility(
+                    rowIds[r],
+                    if (hasDay) View.VISIBLE else View.GONE,
+                )
+            }
+
             for (i in 0 until 42) {
                 val numId = numIds[i]
                 val badgeId = badgeIds[i]
@@ -99,6 +110,10 @@ class MonthWidgetProvider : HomeWidgetProvider() {
         val DEFAULT_NUM_COLOR = Color.parseColor("#AA000000")
         val FALLBACK_COLOR = Color.parseColor("#B0BEC5")
 
+        val rowIds = intArrayOf(
+            R.id.m_row0, R.id.m_row1, R.id.m_row2,
+            R.id.m_row3, R.id.m_row4, R.id.m_row5,
+        )
         val cellIds = intArrayOf(
             R.id.m0_cell, R.id.m1_cell, R.id.m2_cell, R.id.m3_cell, R.id.m4_cell,
             R.id.m5_cell, R.id.m6_cell, R.id.m7_cell, R.id.m8_cell, R.id.m9_cell,
