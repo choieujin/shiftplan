@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:intl/intl.dart';
 
+import '../models/shift_assignment.dart';
 import '../models/shift_type.dart';
 import 'holiday_service.dart';
 
@@ -86,7 +87,7 @@ class WidgetService {
       );
     }
 
-    await _writeMonth(today, typeFor);
+    await _writeDayRange(today, typeFor);
 
     await HomeWidget.saveWidgetData<String>(
       'widget_updated',
@@ -102,42 +103,29 @@ class WidgetService {
     }
   }
 
-  /// 이번 달 달력(월요일 시작, 6주 × 7일 = 42칸)을 JSON 한 덩어리로 저장한다.
+  /// Android 위젯이 스스로 오늘 날짜를 계산해 그릴 수 있도록, 오늘 기준
+  /// ±45일치 근무·공휴일을 dateKey 맵으로 저장한다.
   ///
-  /// 칸마다 개별 키로 저장하면 200회가 넘는 비동기 쓰기가 발생하므로
-  /// 네이티브에서 파싱하도록 JSON 문자열 하나로 넘긴다.
-  static Future<void> _writeMonth(
+  /// 위젯은 저장된 "오늘"에 의존하지 않고 실행 시점의 실제 날짜로 이 맵을
+  /// 조회하므로, 앱을 열지 않아도 자정이 지나면 스스로 갱신된다.
+  static Future<void> _writeDayRange(
     DateTime today,
     ShiftType? Function(DateTime date) typeFor,
   ) async {
-    final DateTime first = DateTime(today.year, today.month, 1);
-    // 그리드 시작일: 1일이 속한 주의 월요일.
-    final DateTime gridStart =
-        first.subtract(Duration(days: first.weekday - DateTime.monday));
-
-    final List<Map<String, dynamic>> days = [];
-    for (int i = 0; i < 42; i++) {
-      final DateTime date = gridStart.add(Duration(days: i));
-      final bool inMonth = date.month == today.month;
-      final ShiftType? type = inMonth ? typeFor(date) : null;
-      days.add({
-        'n': inMonth ? '${date.day}' : '',
-        's': type?.shortLabel ?? '',
-        'c': type == null ? '' : _hex(type),
-        't': inMonth && date == today,
-        // 일요일과 공휴일은 날짜를 빨간색으로.
-        'h': inMonth &&
-            (date.weekday == DateTime.sunday || HolidayService.isHoliday(date)),
-      });
+    final Map<String, dynamic> days = {};
+    for (int i = -45; i <= 45; i++) {
+      final DateTime date = today.add(Duration(days: i));
+      final ShiftType? type = typeFor(date);
+      final bool holiday = date.weekday == DateTime.sunday ||
+          HolidayService.isHoliday(date);
+      if (type == null && !holiday) continue;
+      days[ShiftAssignment.keyFor(date)] = {
+        if (type != null) 's': type.shortLabel,
+        if (type != null) 'c': _hex(type),
+        if (holiday) 'h': 1,
+      };
     }
-
-    await HomeWidget.saveWidgetData<String>(
-      'month_data',
-      jsonEncode({
-        'title': DateFormat('yyyy년 M월', 'ko').format(today),
-        'days': days,
-      }),
-    );
+    await HomeWidget.saveWidgetData<String>('day_data', jsonEncode(days));
   }
 
   static Future<void> _writeDay(

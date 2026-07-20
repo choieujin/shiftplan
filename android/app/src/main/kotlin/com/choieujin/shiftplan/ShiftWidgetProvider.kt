@@ -2,15 +2,18 @@ package com.choieujin.shiftplan
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.widget.RemoteViews
 import es.antonborri.home_widget.HomeWidgetLaunchIntent
 import es.antonborri.home_widget.HomeWidgetProvider
+import java.util.Calendar
 
 /**
- * 홈 화면 위젯. Flutter( home_widget )가 저장한 SharedPreferences 데이터를 읽어
- * 이번 주(월~일) 근무 패턴을 한 줄로 표시한다. 오늘은 테두리로 강조된다.
+ * 이번 주(월~일) 근무를 한 줄로 보여주는 홈 화면 위젯.
+ *
+ * 실행 시점의 실제 날짜로 "이번 주"를 계산하므로, 앱을 열지 않아도
+ * 자정마다 예약된 알람으로 스스로 갱신된다.
  */
 class ShiftWidgetProvider : HomeWidgetProvider() {
 
@@ -32,39 +35,52 @@ class ShiftWidgetProvider : HomeWidgetProvider() {
     )
     private val defaultDows = arrayOf("월", "화", "수", "목", "금", "토", "일")
 
+    override fun onReceive(context: Context, intent: Intent) {
+        super.onReceive(context, intent)
+        // 자정 알람: 위젯을 다시 그리도록 강제 갱신한다.
+        if (intent.action == ShiftDayData.ACTION_MIDNIGHT) {
+            val mgr = AppWidgetManager.getInstance(context)
+            val ids = mgr.getAppWidgetIds(
+                android.content.ComponentName(context, ShiftWidgetProvider::class.java),
+            )
+            if (ids.isNotEmpty()) onUpdate(context, mgr, ids)
+        }
+    }
+
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray,
         widgetData: SharedPreferences,
     ) {
+        val data = ShiftDayData(widgetData)
+
+        val today = ShiftDayData.startOfToday()
+        val todayKey = ShiftDayData.keyFor(today)
+        // 이번 주 월요일.
+        val monday = (today.clone() as Calendar).apply {
+            val dow = get(Calendar.DAY_OF_WEEK) // 일=1..토=7
+            val diff = if (dow == Calendar.SUNDAY) 6 else dow - Calendar.MONDAY
+            add(Calendar.DAY_OF_MONTH, -diff)
+        }
+
         for (widgetId in appWidgetIds) {
             val views = RemoteViews(context.packageName, R.layout.shift_widget)
 
             for (i in 0 until 7) {
-                views.setTextViewText(
-                    dowIds[i],
-                    widgetData.getString("week_${i}_dow", defaultDows[i]) ?: defaultDows[i],
-                )
-                views.setTextViewText(
-                    numIds[i],
-                    widgetData.getString("week_${i}_num", "") ?: "",
-                )
-                views.setTextViewText(
-                    badgeIds[i],
-                    widgetData.getString("week_${i}_short", "-") ?: "-",
-                )
-                views.setInt(
-                    badgeIds[i],
-                    "setBackgroundColor",
-                    parseColor(widgetData.getString("week_${i}_color", null)),
-                )
-                val isToday =
-                    widgetData.getString("week_${i}_today", "false") == "true"
+                val date = (monday.clone() as Calendar).apply {
+                    add(Calendar.DAY_OF_MONTH, i)
+                }
+                val key = ShiftDayData.keyFor(date)
+
+                views.setTextViewText(dowIds[i], defaultDows[i])
+                views.setTextViewText(numIds[i], "${date.get(Calendar.DAY_OF_MONTH)}")
+                views.setTextViewText(badgeIds[i], data.shortFor(key) ?: "-")
+                views.setInt(badgeIds[i], "setBackgroundColor", data.colorFor(key))
                 views.setInt(
                     cellIds[i],
                     "setBackgroundResource",
-                    if (isToday) R.drawable.today_bg else 0,
+                    if (key == todayKey) R.drawable.today_bg else 0,
                 )
             }
 
@@ -72,23 +88,14 @@ class ShiftWidgetProvider : HomeWidgetProvider() {
                 R.id.updated,
                 widgetData.getString("widget_updated", "") ?: "",
             )
-
-            // 위젯을 누르면 앱이 열린다.
-            val pendingIntent = HomeWidgetLaunchIntent.getActivity(
-                context,
-                MainActivity::class.java,
+            views.setOnClickPendingIntent(
+                R.id.widget_root,
+                HomeWidgetLaunchIntent.getActivity(context, MainActivity::class.java),
             )
-            views.setOnClickPendingIntent(R.id.widget_root, pendingIntent)
 
             appWidgetManager.updateAppWidget(widgetId, views)
         }
-    }
 
-    private fun parseColor(hex: String?): Int {
-        return try {
-            Color.parseColor(hex ?: "#B0BEC5")
-        } catch (e: IllegalArgumentException) {
-            Color.parseColor("#B0BEC5")
-        }
+        ShiftDayData.scheduleMidnight(context, ShiftWidgetProvider::class.java)
     }
 }

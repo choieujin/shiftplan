@@ -1,22 +1,34 @@
 package com.choieujin.shiftplan
 
 import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.view.View
 import android.widget.RemoteViews
 import es.antonborri.home_widget.HomeWidgetLaunchIntent
 import es.antonborri.home_widget.HomeWidgetProvider
-import org.json.JSONObject
+import java.util.Calendar
 
 /**
  * 한 달 전체를 보여주는 홈 화면 위젯.
  *
- * Flutter가 `month_data` 키에 저장한 JSON(제목 + 42칸)을 파싱해 표시한다.
- * 칸마다 개별 키를 두면 쓰기 횟수가 200회를 넘기 때문에 JSON 한 덩어리로 받는다.
+ * 실행 시점의 실제 날짜로 이번 달 그리드를 계산하므로, 앱을 열지 않아도
+ * 자정마다 예약된 알람으로 스스로 갱신된다.
  */
 class MonthWidgetProvider : HomeWidgetProvider() {
+
+    override fun onReceive(context: Context, intent: Intent) {
+        super.onReceive(context, intent)
+        if (intent.action == ShiftDayData.ACTION_MIDNIGHT) {
+            val mgr = AppWidgetManager.getInstance(context)
+            val ids = mgr.getAppWidgetIds(
+                ComponentName(context, MonthWidgetProvider::class.java),
+            )
+            if (ids.isNotEmpty()) onUpdate(context, mgr, ids)
+        }
+    }
 
     override fun onUpdate(
         context: Context,
@@ -24,72 +36,73 @@ class MonthWidgetProvider : HomeWidgetProvider() {
         appWidgetIds: IntArray,
         widgetData: SharedPreferences,
     ) {
-        val raw = widgetData.getString("month_data", null)
-        val root = try {
-            if (raw.isNullOrEmpty()) null else JSONObject(raw)
-        } catch (e: org.json.JSONException) {
-            null
+        val data = ShiftDayData(widgetData)
+
+        val today = ShiftDayData.startOfToday()
+        val todayKey = ShiftDayData.keyFor(today)
+        val month = today.get(Calendar.MONTH)
+
+        // 이번 달 1일이 속한 주의 월요일부터 42칸.
+        val gridStart = (today.clone() as Calendar).apply {
+            set(Calendar.DAY_OF_MONTH, 1)
+            val dow = get(Calendar.DAY_OF_WEEK)
+            val diff = if (dow == Calendar.SUNDAY) 6 else dow - Calendar.MONDAY
+            add(Calendar.DAY_OF_MONTH, -diff)
         }
-        val days = root?.optJSONArray("days")
+        val title = "${today.get(Calendar.YEAR)}년 ${month + 1}월"
 
         for (widgetId in appWidgetIds) {
             val views = RemoteViews(context.packageName, R.layout.month_widget)
-
-            views.setTextViewText(R.id.month_title, root?.optString("title") ?: "")
+            views.setTextViewText(R.id.month_title, title)
             views.setTextViewText(
                 R.id.month_updated,
                 widgetData.getString("widget_updated", "") ?: "",
             )
 
-            // 이번 달 날짜가 하나도 없는 주(마지막 줄)는 숨겨 빈 공간을 없앤다.
-            for (r in 0 until 6) {
-                val hasDay = (0 until 7).any { c ->
-                    !(days?.optJSONObject(r * 7 + c)?.optString("n")).isNullOrEmpty()
-                }
-                views.setViewVisibility(
-                    rowIds[r],
-                    if (hasDay) View.VISIBLE else View.GONE,
-                )
-            }
-
+            // 42칸을 채우면서 각 주에 이번 달 날짜가 있는지 기록한다.
+            val rowHasDay = BooleanArray(6)
             for (i in 0 until 42) {
-                val numId = numIds[i]
-                val badgeId = badgeIds[i]
-                val cell = days?.optJSONObject(i)
+                val date = (gridStart.clone() as Calendar).apply {
+                    add(Calendar.DAY_OF_MONTH, i)
+                }
+                val inMonth = date.get(Calendar.MONTH) == month
+                val key = ShiftDayData.keyFor(date)
+                val short = if (inMonth) data.shortFor(key) else null
 
-                val num = cell?.optString("n") ?: ""
-                val short = cell?.optString("s") ?: ""
-                val isToday = cell?.optBoolean("t") ?: false
-                val isHoliday = cell?.optBoolean("h") ?: false
+                if (inMonth) rowHasDay[i / 7] = true
 
-                views.setTextViewText(numId, num)
-                views.setTextColor(
-                    numId,
-                    if (isHoliday) HOLIDAY_COLOR else DEFAULT_NUM_COLOR,
-                )
-
-                val dotId = dotIds[i]
-                if (short.isEmpty()) {
-                    // 근무가 없는 날(또는 이번 달이 아닌 칸)은 배지를 감춘다.
-                    views.setViewVisibility(badgeId, View.INVISIBLE)
-                    views.setViewVisibility(dotId, View.INVISIBLE)
-                } else {
-                    views.setViewVisibility(badgeId, View.VISIBLE)
-                    views.setViewVisibility(dotId, View.VISIBLE)
-                    views.setTextViewText(badgeId, short)
-                    // 흰 원 이미지에 근무 색상을 입힌다. setBackgroundColor를 쓰면
-                    // 배경 drawable이 덮어써져 원 모양이 사라진다.
-                    views.setInt(
-                        dotId,
-                        "setColorFilter",
-                        parseColor(cell?.optString("c")),
+                if (inMonth) {
+                    views.setTextViewText(numIds[i], "${date.get(Calendar.DAY_OF_MONTH)}")
+                    views.setTextColor(
+                        numIds[i],
+                        if (data.isHoliday(key)) HOLIDAY_COLOR else DEFAULT_NUM_COLOR,
                     )
+                } else {
+                    views.setTextViewText(numIds[i], "")
+                }
+
+                if (short == null) {
+                    views.setViewVisibility(badgeIds[i], View.INVISIBLE)
+                    views.setViewVisibility(dotIds[i], View.INVISIBLE)
+                } else {
+                    views.setViewVisibility(badgeIds[i], View.VISIBLE)
+                    views.setViewVisibility(dotIds[i], View.VISIBLE)
+                    views.setTextViewText(badgeIds[i], short)
+                    views.setInt(dotIds[i], "setColorFilter", data.colorFor(key))
                 }
 
                 views.setInt(
                     cellIds[i],
                     "setBackgroundResource",
-                    if (isToday) R.drawable.today_bg else 0,
+                    if (inMonth && key == todayKey) R.drawable.today_bg else 0,
+                )
+            }
+
+            // 이번 달 날짜가 없는 주(마지막 줄)는 숨겨 빈 공간을 없앤다.
+            for (r in 0 until 6) {
+                views.setViewVisibility(
+                    rowIds[r],
+                    if (rowHasDay[r]) View.VISIBLE else View.GONE,
                 )
             }
 
@@ -97,23 +110,15 @@ class MonthWidgetProvider : HomeWidgetProvider() {
                 R.id.month_root,
                 HomeWidgetLaunchIntent.getActivity(context, MainActivity::class.java),
             )
-
             appWidgetManager.updateAppWidget(widgetId, views)
         }
-    }
 
-    private fun parseColor(hex: String?): Int {
-        return try {
-            if (hex.isNullOrEmpty()) FALLBACK_COLOR else Color.parseColor(hex)
-        } catch (e: IllegalArgumentException) {
-            FALLBACK_COLOR
-        }
+        ShiftDayData.scheduleMidnight(context, MonthWidgetProvider::class.java)
     }
 
     private companion object {
-        val HOLIDAY_COLOR = Color.parseColor("#D32F2F")
-        val DEFAULT_NUM_COLOR = Color.parseColor("#AA000000")
-        val FALLBACK_COLOR = Color.parseColor("#B0BEC5")
+        val HOLIDAY_COLOR = android.graphics.Color.parseColor("#D32F2F")
+        val DEFAULT_NUM_COLOR = android.graphics.Color.parseColor("#AA000000")
 
         val rowIds = intArrayOf(
             R.id.m_row0, R.id.m_row1, R.id.m_row2,
