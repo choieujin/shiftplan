@@ -40,6 +40,7 @@ struct ShiftEntry: TimelineEntry {
     let todayShort: String
     let todayTime: String
     let todayColor: Color
+    let todayMemo: String
     let tomorrowDate: String
     let tomorrowName: String
     let tomorrowShort: String
@@ -68,6 +69,7 @@ struct Provider: TimelineProvider {
             todayShort: "주",
             todayTime: "07:00 ~ 15:00",
             todayColor: .green,
+            todayMemo: "치과 예약 15시",
             tomorrowDate: "내일",
             tomorrowName: "야간",
             tomorrowShort: "야",
@@ -104,6 +106,7 @@ struct Provider: TimelineProvider {
             todayShort: str("today_short", "-"),
             todayTime: str("today_time", ""),
             todayColor: colorFromHex(str("today_color", "#B0BEC5")),
+            todayMemo: str("today_memo", ""),
             tomorrowDate: str("tomorrow_date", "내일"),
             tomorrowName: str("tomorrow_name", "없음"),
             tomorrowShort: str("tomorrow_short", "-"),
@@ -207,6 +210,18 @@ struct ShiftWidgetEntryView: View {
                     }
                 }
                 Spacer()
+            }
+
+            if !entry.todayMemo.isEmpty {
+                HStack(spacing: 4) {
+                    Image(systemName: "note.text")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                    Text(entry.todayMemo)
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
+                }
             }
 
             Divider()

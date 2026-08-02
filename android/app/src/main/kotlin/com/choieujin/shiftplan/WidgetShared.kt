@@ -42,6 +42,13 @@ class ShiftDayData(prefs: SharedPreferences) {
     fun isHoliday(key: String): Boolean =
         days.optJSONObject(key)?.optInt("h", 0) == 1
 
+    /** dateKey에 메모가 있으면 그 텍스트, 없으면 null. */
+    fun memoFor(key: String): String? =
+        days.optJSONObject(key)?.optString("m")?.takeIf { it.isNotEmpty() }
+
+    /** dateKey에 메모가 있는지. */
+    fun hasMemo(key: String): Boolean = memoFor(key) != null
+
     companion object {
         val FALLBACK: Int = Color.parseColor("#B0BEC5")
 

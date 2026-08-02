@@ -1,5 +1,10 @@
+import 'dart:ui' as ui;
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../models/shift_type.dart';
@@ -23,6 +28,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
 
+  /// 달력 영역을 이미지로 캡처하기 위한 경계 키.
+  final GlobalKey _shareKey = GlobalKey();
+  bool _sharing = false;
+
   ShiftRepository get repo => widget.repository;
 
   @override
@@ -31,6 +40,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
       appBar: AppBar(
         title: const Text('교대근무 시간표'),
         actions: [
+          IconButton(
+            tooltip: '달력 이미지 공유',
+            icon: _sharing
+                ? const SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.ios_share),
+            onPressed: _sharing ? null : _shareCalendar,
+          ),
           IconButton(
             tooltip: '근무 패턴 적용',
             icon: const Icon(Icons.repeat),
@@ -48,9 +68,19 @@ class _CalendarScreenState extends State<CalendarScreen> {
         builder: (context, _) {
           return Column(
             children: [
-              _buildCalendar(),
-              const Divider(height: 1),
-              ShiftLegend(types: repo.types),
+              RepaintBoundary(
+                key: _shareKey,
+                child: Container(
+                  color: Theme.of(context).colorScheme.surface,
+                  child: Column(
+                    children: [
+                      _buildCalendar(),
+                      const Divider(height: 1),
+                      ShiftLegend(types: repo.types),
+                    ],
+                  ),
+                ),
+              ),
               const Divider(height: 1),
               Expanded(child: _buildSelectedDayPanel()),
             ],
@@ -74,6 +104,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
       focusedDay: _focusedDay,
       selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
       startingDayOfWeek: StartingDayOfWeek.monday,
+      rowHeight: 62,
+      daysOfWeekHeight: 22,
       availableCalendarFormats: const {CalendarFormat.month: '월간'},
       headerStyle: const HeaderStyle(
         formatButtonVisible: false,
@@ -82,11 +114,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
       // 일요일과 대한민국 공휴일은 빨간 글씨로 표시한다.
       weekendDays: const [DateTime.sunday],
       holidayPredicate: HolidayService.isHoliday,
-      calendarStyle: const CalendarStyle(
-        weekendTextStyle: TextStyle(color: Colors.red),
-        holidayTextStyle: TextStyle(color: Colors.red),
-        holidayDecoration: BoxDecoration(),
-      ),
       daysOfWeekStyle: const DaysOfWeekStyle(
         weekendStyle: TextStyle(color: Colors.red),
       ),
@@ -97,46 +124,127 @@ class _CalendarScreenState extends State<CalendarScreen> {
         });
       },
       onPageChanged: (focused) => _focusedDay = focused,
+      // 날짜 숫자를 근무색 원으로 표시하고 그 아래 메모를 한 줄 띄운다.
       calendarBuilders: CalendarBuilders(
-        markerBuilder: (context, day, events) {
-          final ShiftType? type = repo.typeForDate(day);
-          if (type == null) return null;
-          return Positioned(
-            bottom: 4,
-            child: Container(
-              width: 20,
-              height: 16,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: type.color,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Text(
-                type.shortLabel,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          );
-        },
+        defaultBuilder: (context, day, _) => _dayCell(day),
+        todayBuilder: (context, day, _) => _dayCell(day, today: true),
+        selectedBuilder: (context, day, _) => _dayCell(day, selected: true),
+        holidayBuilder: (context, day, _) => _dayCell(day),
+        outsideBuilder: (context, day, _) => _dayCell(day, outside: true),
+        disabledBuilder: (context, day, _) => _dayCell(day, outside: true),
+      ),
+    );
+  }
+
+  /// 날짜 한 칸: 근무가 있으면 숫자를 근무색 원으로, 없으면 평범한 숫자로
+  /// 그리고 그 아래에 메모(있으면)를 한 줄 표시한다.
+  Widget _dayCell(
+    DateTime day, {
+    bool selected = false,
+    bool today = false,
+    bool outside = false,
+  }) {
+    final ShiftType? type = repo.typeForDate(day);
+    final String memo = repo.memoForDate(day);
+    final bool red =
+        day.weekday == DateTime.sunday || HolidayService.isHoliday(day);
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+
+    final Color numberColor = outside
+        ? scheme.onSurface.withOpacity(0.35)
+        : (red ? Colors.red : scheme.onSurface);
+
+    Widget number;
+    if (type != null) {
+      number = Container(
+        width: 28,
+        height: 28,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: type.color.withOpacity(outside ? 0.45 : 1),
+          shape: BoxShape.circle,
+        ),
+        child: Text(
+          '${day.day}',
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      );
+    } else {
+      number = Container(
+        width: 28,
+        height: 28,
+        alignment: Alignment.center,
+        decoration: today
+            ? BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: scheme.primary, width: 1.5),
+              )
+            : null,
+        child: Text(
+          '${day.day}',
+          style: TextStyle(
+            color: numberColor,
+            fontSize: 13,
+            fontWeight: today ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+      );
+    }
+
+    return Container(
+      margin: const EdgeInsets.all(2),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: selected
+            ? Border.all(color: scheme.primary, width: 1.6)
+            : (today
+                ? Border.all(color: scheme.primary.withOpacity(0.4), width: 1)
+                : null),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          number,
+          const SizedBox(height: 2),
+          SizedBox(
+            height: 12,
+            width: double.infinity,
+            child: memo.isEmpty
+                ? const SizedBox.shrink()
+                : Text(
+                    memo,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 8.5,
+                      height: 1.1,
+                      color: scheme.onSurfaceVariant,
+                    ),
+                  ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildSelectedDayPanel() {
     final ShiftType? type = repo.typeForDate(_selectedDay);
+    final String memo = repo.memoForDate(_selectedDay);
     final String dateLabel =
         DateFormat('yyyy년 M월 d일 (E)', 'ko').format(_selectedDay);
     final String? holiday = HolidayService.holidayName(_selectedDay);
 
-    return Padding(
+    return ListView(
       padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
           Row(
             children: [
               Text(dateLabel, style: Theme.of(context).textTheme.titleMedium),
@@ -184,9 +292,104 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ),
               ),
             ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Card(
+          child: ListTile(
+            leading: const Icon(Icons.event_note),
+            title: Text(memo.isEmpty ? '메모 없음' : memo),
+            subtitle: Text(
+              memo.isEmpty ? '약속·연차·월차 등을 기록하세요.' : '탭하여 수정',
+            ),
+            trailing: memo.isEmpty
+                ? const Icon(Icons.add)
+                : IconButton(
+                    icon: const Icon(Icons.delete_outline),
+                    tooltip: '메모 삭제',
+                    onPressed: () => repo.setMemo(_selectedDay, ''),
+                  ),
+            onTap: () => _editMemo(_selectedDay),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _editMemo(DateTime date) async {
+    final controller =
+        TextEditingController(text: repo.memoForDate(date));
+    final String dateLabel = DateFormat('M월 d일 (E)', 'ko').format(date);
+    final String? result = await showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('$dateLabel 메모'),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          maxLines: 3,
+          minLines: 1,
+          textInputAction: TextInputAction.done,
+          decoration: const InputDecoration(
+            hintText: '예: 연차, 오후 3시 약속',
+            border: OutlineInputBorder(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('취소'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, controller.text),
+            child: const Text('저장'),
+          ),
         ],
       ),
     );
+    if (result != null) {
+      await repo.setMemo(date, result);
+    }
+  }
+
+  Future<void> _shareCalendar() async {
+    setState(() => _sharing = true);
+    try {
+      // 한 프레임 기다려 최신 상태가 그려지도록 한다.
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      final boundary = _shareKey.currentContext?.findRenderObject()
+          as RenderRepaintBoundary?;
+      if (boundary == null) return;
+      final ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+      final ByteData? byteData =
+          await image.toByteData(format: ui.ImageByteFormat.png);
+      if (byteData == null) return;
+      final Uint8List bytes = byteData.buffer.asUint8List();
+
+      final String stamp = DateFormat('yyyyMM').format(_focusedDay);
+      final String monthLabel =
+          DateFormat('yyyy년 M월', 'ko').format(_focusedDay);
+      // 파일을 직접 만들지 않고 바이트로 공유해 웹까지 동일하게 동작한다.
+      // iOS/Android 공유시트에서 '이미지 저장' 및 '복사'를 지원한다.
+      await Share.shareXFiles(
+        [
+          XFile.fromData(
+            bytes,
+            name: 'shiftplan_$stamp.png',
+            mimeType: 'image/png',
+          ),
+        ],
+        text: '$monthLabel 근무표',
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('이미지 공유에 실패했습니다: $e')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _sharing = false);
+    }
   }
 
   Future<void> _showAssignSheet(DateTime date) async {

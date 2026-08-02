@@ -91,6 +91,12 @@ class MonthWidgetProvider : HomeWidgetProvider() {
                     views.setInt(dotIds[i], "setColorFilter", data.colorFor(key))
                 }
 
+                // 메모가 있는 날은 오른쪽 위에 작은 점을 표시한다.
+                views.setViewVisibility(
+                    memoIds[i],
+                    if (inMonth && data.hasMemo(key)) View.VISIBLE else View.INVISIBLE,
+                )
+
                 views.setInt(
                     cellIds[i],
                     "setBackgroundResource",
@@ -170,6 +176,18 @@ class MonthWidgetProvider : HomeWidgetProvider() {
             R.id.m32_badge, R.id.m33_badge, R.id.m34_badge, R.id.m35_badge,
             R.id.m36_badge, R.id.m37_badge, R.id.m38_badge, R.id.m39_badge,
             R.id.m40_badge, R.id.m41_badge,
+        )
+        val memoIds = intArrayOf(
+            R.id.m0_memo, R.id.m1_memo, R.id.m2_memo, R.id.m3_memo, R.id.m4_memo,
+            R.id.m5_memo, R.id.m6_memo, R.id.m7_memo, R.id.m8_memo, R.id.m9_memo,
+            R.id.m10_memo, R.id.m11_memo, R.id.m12_memo, R.id.m13_memo,
+            R.id.m14_memo, R.id.m15_memo, R.id.m16_memo, R.id.m17_memo,
+            R.id.m18_memo, R.id.m19_memo, R.id.m20_memo, R.id.m21_memo,
+            R.id.m22_memo, R.id.m23_memo, R.id.m24_memo, R.id.m25_memo,
+            R.id.m26_memo, R.id.m27_memo, R.id.m28_memo, R.id.m29_memo,
+            R.id.m30_memo, R.id.m31_memo, R.id.m32_memo, R.id.m33_memo,
+            R.id.m34_memo, R.id.m35_memo, R.id.m36_memo, R.id.m37_memo,
+            R.id.m38_memo, R.id.m39_memo, R.id.m40_memo, R.id.m41_memo,
         )
     }
 }

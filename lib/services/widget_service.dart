@@ -56,17 +56,16 @@ class WidgetService {
   /// [typeFor]는 반복 패턴 규칙까지 반영된 날짜별 근무 조회 함수다.
   static Future<void> update({
     required ShiftType? Function(DateTime date) typeFor,
+    String Function(DateTime date)? memoFor,
   }) async {
     if (!_supported) return;
     final DateTime now = DateTime.now();
     final DateTime today = DateTime(now.year, now.month, now.day);
+    final DateTime tomorrow = today.add(const Duration(days: 1));
+    String memoOf(DateTime d) => memoFor?.call(d) ?? '';
 
-    await _writeDay('today', today, typeFor(today));
-    await _writeDay(
-      'tomorrow',
-      today.add(const Duration(days: 1)),
-      typeFor(today.add(const Duration(days: 1))),
-    );
+    await _writeDay('today', today, typeFor(today), memoOf(today));
+    await _writeDay('tomorrow', tomorrow, typeFor(tomorrow), memoOf(tomorrow));
 
     // 이번 주 월요일부터 7일.
     final DateTime weekStart =
@@ -87,7 +86,7 @@ class WidgetService {
       );
     }
 
-    await _writeDayRange(today, typeFor);
+    await _writeDayRange(today, typeFor, memoOf);
 
     await HomeWidget.saveWidgetData<String>(
       'widget_updated',
@@ -111,18 +110,21 @@ class WidgetService {
   static Future<void> _writeDayRange(
     DateTime today,
     ShiftType? Function(DateTime date) typeFor,
+    String Function(DateTime date) memoFor,
   ) async {
     final Map<String, dynamic> days = {};
     for (int i = -45; i <= 45; i++) {
       final DateTime date = today.add(Duration(days: i));
       final ShiftType? type = typeFor(date);
+      final String memo = memoFor(date);
       final bool holiday = date.weekday == DateTime.sunday ||
           HolidayService.isHoliday(date);
-      if (type == null && !holiday) continue;
+      if (type == null && !holiday && memo.isEmpty) continue;
       days[ShiftAssignment.keyFor(date)] = {
         if (type != null) 's': type.shortLabel,
         if (type != null) 'c': _hex(type),
         if (holiday) 'h': 1,
+        if (memo.isNotEmpty) 'm': memo,
       };
     }
     await HomeWidget.saveWidgetData<String>('day_data', jsonEncode(days));
@@ -132,6 +134,7 @@ class WidgetService {
     String prefix,
     DateTime date,
     ShiftType? type,
+    String memo,
   ) async {
     await HomeWidget.saveWidgetData<String>(
       '${prefix}_date',
@@ -150,6 +153,7 @@ class WidgetService {
       type?.timeRange ?? '',
     );
     await HomeWidget.saveWidgetData<String>('${prefix}_color', _hex(type));
+    await HomeWidget.saveWidgetData<String>('${prefix}_memo', memo);
   }
 
   /// 위젯 네이티브에서 파싱할 수 있는 hex 색상 문자열. 없으면 회색.

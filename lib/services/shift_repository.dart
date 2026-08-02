@@ -14,6 +14,7 @@ class ShiftRepository extends ChangeNotifier {
   static const String _typesKey = 'shift_types';
   static const String _assignmentsKey = 'shift_assignments';
   static const String _ruleKey = 'pattern_rule';
+  static const String _memosKey = 'shift_memos';
 
   /// 반복 패턴이 덮는 날짜를 명시적으로 비웠음을 나타내는 배정값.
   static const String _clearedMarker = '';
@@ -21,6 +22,8 @@ class ShiftRepository extends ChangeNotifier {
   final List<ShiftType> _types = [];
   // dateKey('yyyy-MM-dd') -> shiftTypeId ('' 은 명시적 비움)
   final Map<String, String> _assignments = {};
+  // dateKey('yyyy-MM-dd') -> 메모 텍스트 (약속/연차/월차 등)
+  final Map<String, String> _memos = {};
 
   // 시작일부터 무제한 반복되는 패턴 규칙.
   DateTime? _ruleStart;
@@ -34,6 +37,12 @@ class ShiftRepository extends ChangeNotifier {
   Map<String, ShiftType> get typesById => {for (final t in _types) t.id: t};
 
   Map<String, String> get assignments => Map.unmodifiable(_assignments);
+
+  Map<String, String> get memos => Map.unmodifiable(_memos);
+
+  /// [date]에 기록된 메모. 없으면 빈 문자열.
+  String memoForDate(DateTime date) =>
+      _memos[ShiftAssignment.keyFor(date)] ?? '';
 
   bool get hasPatternRule => _ruleStart != null && _rulePattern.isNotEmpty;
 
@@ -84,6 +93,14 @@ class ShiftRepository extends ChangeNotifier {
       map.forEach((k, v) => _assignments[k] = v as String);
     }
 
+    final String? memosRaw = prefs.getString(_memosKey);
+    _memos.clear();
+    if (memosRaw != null) {
+      final Map<String, dynamic> map =
+          jsonDecode(memosRaw) as Map<String, dynamic>;
+      map.forEach((k, v) => _memos[k] = v as String);
+    }
+
     final String? ruleRaw = prefs.getString(_ruleKey);
     _ruleStart = null;
     _rulePattern = [];
@@ -110,6 +127,10 @@ class ShiftRepository extends ChangeNotifier {
 
   Future<void> _persistAssignments(SharedPreferences prefs) async {
     await prefs.setString(_assignmentsKey, jsonEncode(_assignments));
+  }
+
+  Future<void> _persistMemos(SharedPreferences prefs) async {
+    await prefs.setString(_memosKey, jsonEncode(_memos));
   }
 
   Future<void> _persistRule(SharedPreferences prefs) async {
@@ -170,6 +191,23 @@ class ShiftRepository extends ChangeNotifier {
     _setAssignment(key, date, shiftTypeId);
     final prefs = await SharedPreferences.getInstance();
     await _persistAssignments(prefs);
+    notifyListeners();
+    await _syncWidget();
+  }
+
+  // --- 날짜 메모 -----------------------------------------------------------
+
+  /// [date]의 메모를 [text]로 설정한다. 빈 문자열이면 메모를 삭제한다.
+  Future<void> setMemo(DateTime date, String text) async {
+    final String key = ShiftAssignment.keyFor(date);
+    final String trimmed = text.trim();
+    if (trimmed.isEmpty) {
+      _memos.remove(key);
+    } else {
+      _memos[key] = trimmed;
+    }
+    final prefs = await SharedPreferences.getInstance();
+    await _persistMemos(prefs);
     notifyListeners();
     await _syncWidget();
   }
@@ -238,6 +276,6 @@ class ShiftRepository extends ChangeNotifier {
 
   Future<void> _syncWidget() async {
     // typeForDate가 반복 패턴 규칙과 명시적 비움까지 반영한다.
-    await WidgetService.update(typeFor: typeForDate);
+    await WidgetService.update(typeFor: typeForDate, memoFor: memoForDate);
   }
 }

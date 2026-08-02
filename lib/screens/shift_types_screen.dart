@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models/shift_type.dart';
@@ -119,8 +120,8 @@ class _ShiftTypeEditorState extends State<_ShiftTypeEditor> {
 
   late final TextEditingController _name;
   late final TextEditingController _short;
-  late final TextEditingController _start;
-  late final TextEditingController _end;
+  String? _startTime;
+  String? _endTime;
   late int _color;
 
   @override
@@ -129,8 +130,8 @@ class _ShiftTypeEditorState extends State<_ShiftTypeEditor> {
     final e = widget.existing;
     _name = TextEditingController(text: e?.name ?? '');
     _short = TextEditingController(text: e?.shortLabel ?? '');
-    _start = TextEditingController(text: e?.startTime ?? '');
-    _end = TextEditingController(text: e?.endTime ?? '');
+    _startTime = e?.startTime;
+    _endTime = e?.endTime;
     _color = e?.colorValue ?? _palette.first;
   }
 
@@ -138,8 +139,6 @@ class _ShiftTypeEditorState extends State<_ShiftTypeEditor> {
   void dispose() {
     _name.dispose();
     _short.dispose();
-    _start.dispose();
-    _end.dispose();
     super.dispose();
   }
 
@@ -164,25 +163,36 @@ class _ShiftTypeEditorState extends State<_ShiftTypeEditor> {
                 counterText: '',
               ),
             ),
+            const SizedBox(height: 12),
             Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    controller: _start,
-                    decoration: const InputDecoration(
-                      labelText: '시작 (선택)',
-                      hintText: '09:00',
-                    ),
+                  child: _TimeField(
+                    label: '시작',
+                    value: _startTime,
+                    onTap: () async {
+                      final picked =
+                          await _pickTime(_startTime ?? _endTime ?? '09:00');
+                      if (picked != null) setState(() => _startTime = picked);
+                    },
+                    onClear: _startTime == null
+                        ? null
+                        : () => setState(() => _startTime = null),
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: TextField(
-                    controller: _end,
-                    decoration: const InputDecoration(
-                      labelText: '종료 (선택)',
-                      hintText: '18:00',
-                    ),
+                  child: _TimeField(
+                    label: '종료',
+                    value: _endTime,
+                    onTap: () async {
+                      final picked =
+                          await _pickTime(_endTime ?? _startTime ?? '18:00');
+                      if (picked != null) setState(() => _endTime = picked);
+                    },
+                    onClear: _endTime == null
+                        ? null
+                        : () => setState(() => _endTime = null),
                   ),
                 ),
               ],
@@ -233,6 +243,16 @@ class _ShiftTypeEditorState extends State<_ShiftTypeEditor> {
     );
   }
 
+  /// 시/분(10분 단위) 휠 피커를 띄우고 'HH:mm' 문자열을 돌려준다.
+  /// 취소하면 null.
+  Future<String?> _pickTime(String initial) {
+    return showModalBottomSheet<String>(
+      context: context,
+      showDragHandle: true,
+      builder: (context) => _TimeWheelSheet(initial: initial),
+    );
+  }
+
   Future<void> _save() async {
     final String name = _name.text.trim();
     final String short = _short.text.trim();
@@ -242,8 +262,8 @@ class _ShiftTypeEditorState extends State<_ShiftTypeEditor> {
       );
       return;
     }
-    final String? start = _start.text.trim().isEmpty ? null : _start.text.trim();
-    final String? end = _end.text.trim().isEmpty ? null : _end.text.trim();
+    final String? start = _startTime;
+    final String? end = _endTime;
 
     if (widget.existing == null) {
       await widget.repository.addType(
@@ -268,5 +288,183 @@ class _ShiftTypeEditorState extends State<_ShiftTypeEditor> {
       );
     }
     if (mounted) Navigator.pop(context);
+  }
+}
+
+/// 시작/종료 시간을 보여주고 탭하면 휠 피커를 여는 입력 필드.
+class _TimeField extends StatelessWidget {
+  const _TimeField({
+    required this.label,
+    required this.value,
+    required this.onTap,
+    this.onClear,
+  });
+
+  final String label;
+  final String? value;
+  final VoidCallback onTap;
+  final VoidCallback? onClear;
+
+  @override
+  Widget build(BuildContext context) {
+    final bool hasValue = value != null;
+    return InputDecorator(
+      decoration: InputDecoration(
+        labelText: label,
+        border: const OutlineInputBorder(),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        suffixIcon: hasValue
+            ? IconButton(
+                icon: const Icon(Icons.close, size: 18),
+                tooltip: '시간 지우기',
+                onPressed: onClear,
+              )
+            : const Icon(Icons.expand_more),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Text(
+            value ?? '선택 안 함',
+            style: TextStyle(
+              fontSize: 16,
+              color: hasValue
+                  ? Theme.of(context).colorScheme.onSurface
+                  : Theme.of(context).hintColor,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// 시(0~23)와 분(10분 단위) 두 개의 휠로 시간을 고르는 바텀시트.
+class _TimeWheelSheet extends StatefulWidget {
+  const _TimeWheelSheet({required this.initial});
+
+  final String initial;
+
+  @override
+  State<_TimeWheelSheet> createState() => _TimeWheelSheetState();
+}
+
+class _TimeWheelSheetState extends State<_TimeWheelSheet> {
+  static const List<int> _minutes = [0, 10, 20, 30, 40, 50];
+
+  late int _hour;
+  late int _minuteIndex;
+  late final FixedExtentScrollController _hourCtrl;
+  late final FixedExtentScrollController _minuteCtrl;
+
+  @override
+  void initState() {
+    super.initState();
+    int h = 9;
+    int m = 0;
+    final parts = widget.initial.split(':');
+    if (parts.length == 2) {
+      h = int.tryParse(parts[0]) ?? 9;
+      m = int.tryParse(parts[1]) ?? 0;
+    }
+    _hour = h.clamp(0, 23);
+    // 가장 가까운 10분 눈금으로 맞춘다.
+    final int rounded = ((m + 5) ~/ 10) * 10;
+    _minuteIndex = _minutes.indexOf(rounded.clamp(0, 50));
+    if (_minuteIndex < 0) _minuteIndex = 0;
+    _hourCtrl = FixedExtentScrollController(initialItem: _hour);
+    _minuteCtrl = FixedExtentScrollController(initialItem: _minuteIndex);
+  }
+
+  @override
+  void dispose() {
+    _hourCtrl.dispose();
+    _minuteCtrl.dispose();
+    super.dispose();
+  }
+
+  String get _formatted =>
+      '${_hour.toString().padLeft(2, '0')}:'
+      '${_minutes[_minuteIndex].toString().padLeft(2, '0')}';
+
+  @override
+  Widget build(BuildContext context) {
+    final onSurface = Theme.of(context).colorScheme.onSurface;
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              '시간 선택',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
+          SizedBox(
+            height: 180,
+            child: Row(
+              children: [
+                Expanded(
+                  child: CupertinoPicker(
+                    scrollController: _hourCtrl,
+                    itemExtent: 40,
+                    onSelectedItemChanged: (i) => setState(() => _hour = i),
+                    children: [
+                      for (int h = 0; h < 24; h++)
+                        Center(
+                          child: Text(
+                            '${h.toString().padLeft(2, '0')}시',
+                            style: TextStyle(fontSize: 20, color: onSurface),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: CupertinoPicker(
+                    scrollController: _minuteCtrl,
+                    itemExtent: 40,
+                    onSelectedItemChanged: (i) =>
+                        setState(() => _minuteIndex = i),
+                    children: [
+                      for (final m in _minutes)
+                        Center(
+                          child: Text(
+                            '${m.toString().padLeft(2, '0')}분',
+                            style: TextStyle(fontSize: 20, color: onSurface),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+            child: Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('취소'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: FilledButton(
+                    onPressed: () => Navigator.pop(context, _formatted),
+                    child: Text('$_formatted 선택'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

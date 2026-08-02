@@ -33,6 +33,10 @@ class ShiftWidgetProvider : HomeWidgetProvider() {
         R.id.day0_badge, R.id.day1_badge, R.id.day2_badge, R.id.day3_badge,
         R.id.day4_badge, R.id.day5_badge, R.id.day6_badge,
     )
+    private val memoIds = intArrayOf(
+        R.id.day0_memo, R.id.day1_memo, R.id.day2_memo, R.id.day3_memo,
+        R.id.day4_memo, R.id.day5_memo, R.id.day6_memo,
+    )
     private val defaultDows = arrayOf("월", "화", "수", "목", "금", "토", "일")
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -77,6 +81,11 @@ class ShiftWidgetProvider : HomeWidgetProvider() {
                 views.setTextViewText(numIds[i], "${date.get(Calendar.DAY_OF_MONTH)}")
                 views.setTextViewText(badgeIds[i], data.shortFor(key) ?: "-")
                 views.setInt(badgeIds[i], "setBackgroundColor", data.colorFor(key))
+                views.setViewVisibility(
+                    memoIds[i],
+                    if (data.hasMemo(key)) android.view.View.VISIBLE
+                    else android.view.View.INVISIBLE,
+                )
                 views.setInt(
                     cellIds[i],
                     "setBackgroundResource",

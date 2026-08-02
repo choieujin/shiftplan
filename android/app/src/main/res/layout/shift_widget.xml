@@ -81,6 +81,15 @@
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
             android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/day0_memo"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/memo_dot"
+            android:visibility="invisible"
+            android:contentDescription="@null" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/day1_cell"
@@ -124,6 +133,15 @@
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
             android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/day1_memo"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/memo_dot"
+            android:visibility="invisible"
+            android:contentDescription="@null" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/day2_cell"
@@ -167,6 +185,15 @@
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
             android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/day2_memo"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/memo_dot"
+            android:visibility="invisible"
+            android:contentDescription="@null" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/day3_cell"
@@ -210,6 +237,15 @@
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
             android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/day3_memo"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/memo_dot"
+            android:visibility="invisible"
+            android:contentDescription="@null" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/day4_cell"
@@ -253,6 +289,15 @@
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
             android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/day4_memo"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/memo_dot"
+            android:visibility="invisible"
+            android:contentDescription="@null" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/day5_cell"
@@ -296,6 +341,15 @@
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
             android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/day5_memo"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/memo_dot"
+            android:visibility="invisible"
+            android:contentDescription="@null" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/day6_cell"
@@ -339,6 +393,15 @@
             android:textStyle="bold"
             android:textColor="#FFFFFFFF"
             android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/day6_memo"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/memo_dot"
+            android:visibility="invisible"
+            android:contentDescription="@null" />
     </LinearLayout>
     </LinearLayout>
 </LinearLayout>
