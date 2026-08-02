@@ -104,8 +104,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
       focusedDay: _focusedDay,
       selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
       startingDayOfWeek: StartingDayOfWeek.monday,
-      rowHeight: 62,
-      daysOfWeekHeight: 22,
+      rowHeight: 54,
+      daysOfWeekHeight: 20,
+      sixWeekMonthsEnforced: false,
       availableCalendarFormats: const {CalendarFormat.month: '월간'},
       headerStyle: const HeaderStyle(
         formatButtonVisible: false,
@@ -240,7 +241,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final String? holiday = HolidayService.holidayName(_selectedDay);
 
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(12, 10, 12, 92),
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -260,10 +261,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ],
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           if (type == null)
             const Card(
+              margin: EdgeInsets.symmetric(vertical: 4),
               child: ListTile(
+                dense: true,
                 leading: Icon(Icons.event_available),
                 title: Text('배정된 근무 없음'),
                 subtitle: Text('아래 버튼으로 근무를 배정하세요.'),
@@ -271,7 +274,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
             )
           else
             Card(
+              margin: const EdgeInsets.symmetric(vertical: 4),
               child: ListTile(
+                dense: true,
                 leading: CircleAvatar(
                   backgroundColor: type.color,
                   child: Text(
@@ -294,9 +299,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
           ],
         ),
-        const SizedBox(height: 8),
         Card(
+          margin: const EdgeInsets.symmetric(vertical: 4),
           child: ListTile(
+            dense: true,
             leading: const Icon(Icons.event_note),
             title: Text(memo.isEmpty ? '메모 없음' : memo),
             subtitle: Text(
@@ -354,21 +360,39 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   Future<void> _shareCalendar() async {
     setState(() => _sharing = true);
+    Uint8List? bytes;
     try {
       // 한 프레임 기다려 최신 상태가 그려지도록 한다.
       await Future<void>.delayed(const Duration(milliseconds: 50));
       final boundary = _shareKey.currentContext?.findRenderObject()
           as RenderRepaintBoundary?;
-      if (boundary == null) return;
-      final ui.Image image = await boundary.toImage(pixelRatio: 3.0);
-      final ByteData? byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
-      if (byteData == null) return;
-      final Uint8List bytes = byteData.buffer.asUint8List();
+      if (boundary != null) {
+        final ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+        final ByteData? byteData =
+            await image.toByteData(format: ui.ImageByteFormat.png);
+        bytes = byteData?.buffer.asUint8List();
+      }
+    } catch (_) {
+      bytes = null;
+    } finally {
+      // 캡처가 끝나면 즉시 스피너를 멈춘다. 공유시트의 취소 동작은
+      // (iOS에서 future가 늦게/안 돌아올 수 있어) 스피너와 분리한다.
+      if (mounted) setState(() => _sharing = false);
+    }
 
-      final String stamp = DateFormat('yyyyMM').format(_focusedDay);
-      final String monthLabel =
-          DateFormat('yyyy년 M월', 'ko').format(_focusedDay);
+    if (bytes == null) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('달력 이미지를 만들지 못했습니다.')),
+        );
+      }
+      return;
+    }
+
+    final String stamp = DateFormat('yyyyMM').format(_focusedDay);
+    final String monthLabel =
+        DateFormat('yyyy년 M월', 'ko').format(_focusedDay);
+    try {
       // 파일을 직접 만들지 않고 바이트로 공유해 웹까지 동일하게 동작한다.
       // iOS/Android 공유시트에서 '이미지 저장' 및 '복사'를 지원한다.
       await Share.shareXFiles(
@@ -381,14 +405,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
         ],
         text: '$monthLabel 근무표',
       );
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('이미지 공유에 실패했습니다: $e')),
-        );
-      }
-    } finally {
-      if (mounted) setState(() => _sharing = false);
+    } catch (_) {
+      // 공유시트 취소/실패는 조용히 무시한다.
     }
   }
 

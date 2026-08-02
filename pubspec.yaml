@@ -1,7 +1,7 @@
 name: shiftplan
 description: "교대근무 시간표 - 달력 + 홈 위젯 (Android/iOS)"
 publish_to: "none"
-version: 1.0.1+2
+version: 1.0.1+3
 
 environment:
   sdk: ">=3.3.0 <4.0.0"
