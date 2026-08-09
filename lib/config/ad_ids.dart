@@ -8,8 +8,10 @@ import 'package:flutter/foundation.dart';
 class AdIds {
   AdIds._();
 
+  // [임시 확인용] 연동 점검 동안 구글 테스트 배너 ID 사용. 확인 후 아래
+  // 실제 ID로 되돌린다: 'ca-app-pub-4072566205952525/1063396694'
   static const String _androidBanner =
-      'ca-app-pub-4072566205952525/1063396694';
+      'ca-app-pub-3940256099942544/6300978111';
 
   static String get banner {
     if (defaultTargetPlatform == TargetPlatform.android) {
