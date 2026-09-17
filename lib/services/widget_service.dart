@@ -117,8 +117,7 @@ class WidgetService {
       final DateTime date = today.add(Duration(days: i));
       final ShiftType? type = typeFor(date);
       final String memo = memoFor(date);
-      final bool holiday = date.weekday == DateTime.sunday ||
-          HolidayService.isHoliday(date);
+      final bool holiday = HolidayService.isRedDay(date);
       if (type == null && !holiday && memo.isEmpty) continue;
       days[ShiftAssignment.keyFor(date)] = {
         if (type != null) 's': type.shortLabel,

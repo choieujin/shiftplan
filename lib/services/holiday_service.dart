@@ -26,6 +26,11 @@ class HolidayService {
 
   static bool isHoliday(DateTime date) => holidayName(date) != null;
 
+  /// 달력에서 날짜 숫자를 빨간색으로 표시할 날.
+  /// 일요일이거나 대한민국 공휴일(대체공휴일 포함)이면 true.
+  static bool isRedDay(DateTime date) =>
+      date.weekday == DateTime.sunday || isHoliday(date);
+
   /// [date]가 공휴일이면 이름을, 아니면 null을 반환한다.
   static String? holidayName(DateTime date) {
     if (date.year < 1900 || date.year > 2049) return null;
