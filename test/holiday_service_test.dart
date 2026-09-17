@@ -59,4 +59,31 @@ void main() {
       expect(HolidayService.isHoliday(DateTime(2026, 6, 8)), isFalse);
     });
   });
+
+  group('빨간 날(달력 숫자 빨간색)', () {
+    test('평일 공휴일도 빨간 날이다', () {
+      // 2026-01-01 신정(목), 2026-02-17 설날(화).
+      expect(DateTime(2026, 1, 1).weekday, DateTime.thursday);
+      expect(HolidayService.isRedDay(DateTime(2026, 1, 1)), isTrue);
+      expect(HolidayService.isRedDay(DateTime(2026, 2, 17)), isTrue);
+    });
+
+    test('대체공휴일도 빨간 날이다', () {
+      expect(HolidayService.isRedDay(DateTime(2026, 3, 2)), isTrue);
+      expect(HolidayService.isRedDay(DateTime(2026, 8, 17)), isTrue);
+    });
+
+    test('일요일은 공휴일이 아니어도 빨간 날이다', () {
+      final DateTime sunday = DateTime(2026, 7, 12);
+      expect(sunday.weekday, DateTime.sunday);
+      expect(HolidayService.isHoliday(sunday), isFalse);
+      expect(HolidayService.isRedDay(sunday), isTrue);
+    });
+
+    test('토요일과 평일은 빨간 날이 아니다', () {
+      expect(DateTime(2026, 7, 11).weekday, DateTime.saturday);
+      expect(HolidayService.isRedDay(DateTime(2026, 7, 11)), isFalse);
+      expect(HolidayService.isRedDay(DateTime(2026, 7, 15)), isFalse);
+    });
+  });
 }

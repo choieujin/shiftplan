@@ -127,18 +127,31 @@ class _CalendarScreenState extends State<CalendarScreen> {
       onPageChanged: (focused) => _focusedDay = focused,
       // 날짜 숫자를 근무색 원으로 표시하고 그 아래 메모를 한 줄 띄운다.
       calendarBuilders: CalendarBuilders(
-        defaultBuilder: (context, day, _) => _dayCell(day),
-        todayBuilder: (context, day, _) => _dayCell(day, today: true),
-        selectedBuilder: (context, day, _) => _dayCell(day, selected: true),
-        holidayBuilder: (context, day, _) => _dayCell(day),
+        defaultBuilder: (context, day, focused) =>
+            _dayCell(day, outside: _isOutside(day, focused)),
+        todayBuilder: (context, day, focused) =>
+            _dayCell(day, today: true, outside: _isOutside(day, focused)),
+        selectedBuilder: (context, day, focused) =>
+            _dayCell(day, selected: true, outside: _isOutside(day, focused)),
+        // 공휴일 빌더는 이전·다음 달 날짜에도 쓰이므로 직접 판단해야 한다.
+        holidayBuilder: (context, day, focused) =>
+            _dayCell(day, outside: _isOutside(day, focused)),
         outsideBuilder: (context, day, _) => _dayCell(day, outside: true),
         disabledBuilder: (context, day, _) => _dayCell(day, outside: true),
       ),
     );
   }
 
+  /// [day]가 현재 보고 있는 달([focused])에 속하지 않는 날인지.
+  static bool _isOutside(DateTime day, DateTime focused) =>
+      day.year != focused.year || day.month != focused.month;
+
   /// 날짜 한 칸: 근무가 있으면 숫자를 근무색 원으로, 없으면 평범한 숫자로
   /// 그리고 그 아래에 메모(있으면)를 한 줄 표시한다.
+  ///
+  /// 일요일과 대한민국 공휴일(대체공휴일 포함)은 숫자를 빨간색으로 쓴다.
+  /// 근무가 배정된 빨간 날은 원을 근무색으로 채우는 대신 근무색 테두리만
+  /// 남겨, 빨간 숫자가 그대로 보이게 한다.
   Widget _dayCell(
     DateTime day, {
     bool selected = false,
@@ -147,28 +160,30 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }) {
     final ShiftType? type = repo.typeForDate(day);
     final String memo = repo.memoForDate(day);
-    final bool red =
-        day.weekday == DateTime.sunday || HolidayService.isHoliday(day);
+    final bool red = HolidayService.isRedDay(day);
     final ColorScheme scheme = Theme.of(context).colorScheme;
 
-    final Color numberColor = outside
-        ? scheme.onSurface.withOpacity(0.35)
-        : (red ? Colors.red : scheme.onSurface);
+    final Color plainColor = red ? Colors.red : scheme.onSurface;
+    final Color numberColor =
+        outside ? plainColor.withOpacity(red ? 0.4 : 0.35) : plainColor;
 
     Widget number;
     if (type != null) {
+      final Color shiftColor = type.color.withOpacity(outside ? 0.45 : 1);
       number = Container(
         width: 28,
         height: 28,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: type.color.withOpacity(outside ? 0.45 : 1),
+          // 빨간 날은 원을 채우지 않고 근무색 테두리만 둘러 숫자를 빨갛게 둔다.
+          color: red ? null : shiftColor,
           shape: BoxShape.circle,
+          border: red ? Border.all(color: shiftColor, width: 2.5) : null,
         ),
         child: Text(
           '${day.day}',
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: red ? numberColor : Colors.white,
             fontSize: 13,
             fontWeight: FontWeight.bold,
           ),
